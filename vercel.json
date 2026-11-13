@@ -19,11 +19,20 @@
       "dest": "backend/app.js"
     },
     {
-      "handle": "filesystem"
+      "src": "/assets/(.*)",
+      "dest": "/frontend/assets/$1"
+    },
+    {
+      "src": "/favicon.(ico|png|svg)",
+      "dest": "/frontend/favicon.$1"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "dest": "/frontend/apple-touch-icon.png"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/frontend/index.html"
     }
   ]
 }

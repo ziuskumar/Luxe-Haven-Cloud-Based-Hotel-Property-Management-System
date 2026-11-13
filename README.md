@@ -4,11 +4,10 @@
 
 ### *Enterprise-Grade Hotel PMS, Hospitality Intelligence Platform & Cloud DevOps Architecture*
 
-[![AWS](https://img.shields.io/badge/AWS-Cloud%20Architecture-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
-[![Vercel](https://img.shields.io/badge/Vercel-Production%20Deployment-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
-[![Jenkins](https://img.shields.io/badge/Jenkins-CI%2FCD%20Pipeline-D24939?style=for-the-badge&logo=jenkins&logoColor=white)](https://www.jenkins.io/)
-[![Docker Hub](https://img.shields.io/badge/Docker_Hub-Container%20Registry-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/)
+[![Vercel](https://img.shields.io/badge/Vercel-Live%20Production-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://luxe-haven-cloud-based-hotel-proper.vercel.app)
 [![AWS ALB](https://img.shields.io/badge/AWS%20ALB-Load%20Balanced-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)](http://ae15b29242bea445798199488eaa98b7-1484264032.us-east-1.elb.amazonaws.com)
+[![Docker Hub](https://img.shields.io/badge/Docker_Hub-Container%20Registry-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/)
+[![Jenkins](https://img.shields.io/badge/Jenkins-CI%2FCD%20Pipeline-D24939?style=for-the-badge&logo=jenkins&logoColor=white)](https://www.jenkins.io/)
 <br/>
 [![Node.js](https://img.shields.io/badge/Node.js-v22+-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
@@ -25,16 +24,17 @@
 
 <br/>
 
-**[🌐 AWS Live ALB Link](http://ae15b29242bea445798199488eaa98b7-1484264032.us-east-1.elb.amazonaws.com)** • **[🚀 Vercel Deployment](#-vercel-cloud-deployment)** • **[☁️ Cloud & DevOps](#️-enterprise-cloud-architecture--devops-cicd-pipeline)** • **[📸 System Gallery](#-system-gallery--live-ui-showcase)** • **[🔑 RBAC Accounts](#-role-based-access-control-rbac--demo-accounts)** • **[⚡ Quick Setup](#-quick-start--setup)**
+**[🚀 Live Vercel Deployment](https://luxe-haven-cloud-based-hotel-proper.vercel.app/)** • **[🌐 AWS Live ALB Link](http://ae15b29242bea445798199488eaa98b7-1484264032.us-east-1.elb.amazonaws.com)** • **[☁️ Cloud & DevOps](#️-enterprise-cloud-architecture--devops-cicd-pipeline)** • **[📸 System Gallery](#-system-gallery--live-ui-showcase)** • **[🔑 RBAC Accounts](#-role-based-access-control-rbac--demo-accounts)** • **[⚡ Quick Setup](#-quick-start--setup)**
 
 ---
 
 </div>
 
-> 🌐 **AWS Production / Staging Deployment (Elastic Load Balancer)**:  
-> **Direct Endpoint**: [http://ae15b29242bea445798199488eaa98b7-1484264032.us-east-1.elb.amazonaws.com](http://ae15b29242bea445798199488eaa98b7-1484264032.us-east-1.elb.amazonaws.com)  
+> 🚀 **Live Production Deployments**:  
+> - **Vercel Edge Cloud**: **[https://luxe-haven-cloud-based-hotel-proper.vercel.app](https://luxe-haven-cloud-based-hotel-proper.vercel.app/)**  
+> - **AWS Load Balancer (ALB)**: **[http://ae15b29242bea445798199488eaa98b7-1484264032.us-east-1.elb.amazonaws.com](http://ae15b29242bea445798199488eaa98b7-1484264032.us-east-1.elb.amazonaws.com)**  
 > 
-> ℹ️ *Cloud Infrastructure & FinOps Notice: This system is live on an enterprise AWS architecture (AWS EC2 compute, Application Load Balancer, and S3 media storage). Following modern cloud FinOps cost-governance principles, this active multi-service deployment is provisioned for recruiter and reviewer evaluation and will expire/scale down after the scheduled demo period.*
+> ℹ️ *Cloud Infrastructure & FinOps Notice: The AWS environment is live on an enterprise AWS architecture (AWS EC2 compute, Application Load Balancer, and S3 media storage). Following modern cloud FinOps cost-governance principles, this active multi-service deployment is provisioned for recruiter and reviewer evaluation and will expire/scale down after the scheduled demo period.*
 
 ---
 
@@ -197,15 +197,20 @@ The repository includes a production-grade `vercel.json` configured for hybrid e
       "dest": "backend/app.js"
     },
     {
-      "handle": "filesystem"
+      "src": "/assets/(.*)",
+      "dest": "/frontend/assets/$1"
     },
     {
-      "src": "/assets/(.*)",
-      "dest": "frontend/dist/assets/$1"
+      "src": "/favicon.(ico|png|svg)",
+      "dest": "/frontend/favicon.$1"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "dest": "/frontend/apple-touch-icon.png"
     },
     {
       "src": "/(.*)",
-      "dest": "frontend/dist/index.html"
+      "dest": "/frontend/index.html"
     }
   ]
 }
