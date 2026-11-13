@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  luxehaven-pms:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: luxehaven_pms
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGO_URL=mongodb+srv://luckykv17_db_user:HETcndVJlRbg38xS@clusterlx.zfgujix.mongodb.net/THEAIR?retryWrites=true&w=majority&appName=Cluster0
+      - ATLAS_URI=mongodb+srv://zius:KumarZius%260055@cluster0.drtaau6.mongodb.net/THEAIR?retryWrites=true&w=majority&appName=Cluster0
+      - JWT_SECRET=LuxeHavenSecretKey2026
+      - SECRET=LuxeHavenSecretKey2026
