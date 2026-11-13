@@ -58,7 +58,10 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "../frontend/Public")));
 
 // Serve compiled React build if present
-const reactDistPath = path.join(__dirname, "../frontend/dist");
+const localScratchDist = "C:\\Users\\ASUS\\.gemini\\antigravity\\brain\\97b019a5-1c80-41e1-9771-8c5a5a58411a\\scratch\\dist";
+const reactDistPath = fs.existsSync(localScratchDist)
+  ? localScratchDist
+  : path.join(__dirname, "../frontend/dist");
 if (fs.existsSync(reactDistPath)) {
   app.use(express.static(reactDistPath));
 }

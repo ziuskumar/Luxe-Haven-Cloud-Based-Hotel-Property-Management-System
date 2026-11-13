@@ -6,7 +6,6 @@ import {
   Sliders,
   DollarSign,
   BedDouble,
-  ShieldAlert,
   Save,
   Check,
   RefreshCw,
@@ -54,7 +53,6 @@ export default function ManagerDashboard() {
 
   const savePricingRules = async () => {
     try {
-      // Update dynamic pricing across active rooms
       for (const r of rooms) {
         await API.put(`/rooms/${r._id}`, {
           dynamicPricing: pricingRules,
@@ -80,63 +78,65 @@ export default function ManagerDashboard() {
 
   return (
     <div className="space-y-6">
-      {/* Manager Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-800/40 p-4 rounded-2xl border border-slate-700/60">
+      {/* Saturated Bordeaux Maroon Band (#780016) */}
+      <div className="bg-bordeaux-maroon text-plaster-white rounded-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold font-serif text-white tracking-tight flex items-center gap-2">
-            Hotel Manager Operations & Yield Management
-            <span className="text-xs font-sans font-semibold bg-sky-950 text-sky-400 border border-sky-800 px-2 py-0.5 rounded-full">
-              Dynamic Pricing Engine
-            </span>
+          <span className="inline-flex items-center gap-2 bg-black/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-voltage-lime mb-2">
+            Operations & Yield Management
+          </span>
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
+            Dynamic Pricing & <span className="text-voltage-lime">Yield Algorithm</span>
           </h1>
-          <p className="text-xs text-slate-400 mt-0.5">
-            Configure dynamic rate multipliers, surge thresholds, and supervise room inventory
+          <p className="text-xs sm:text-sm text-plaster-white/90 mt-2 font-medium">
+            Configure dynamic surcharge multipliers, seasonal factors, and monitor room inventory rates.
           </p>
         </div>
 
         <button
           onClick={fetchRooms}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium border border-slate-700 transition"
+          className="btn-lime text-xs px-5 py-2.5"
         >
           <RefreshCw className="w-3.5 h-3.5" />
-          <span>Refresh</span>
+          <span>Refresh Inventory</span>
         </button>
       </div>
 
-      {/* Dynamic Pricing Engine Rules Panel */}
-      <div className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/80 space-y-6">
-        <div className="flex items-center justify-between border-b border-slate-700/60 pb-3">
+      {/* Dynamic Pricing Engine Rules Panel - Plaster White (#ffffff) */}
+      <div className="card-plaster space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-4 gap-3">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20">
+            <div className="p-2.5 rounded-full bg-voltage-lime text-midnight-ink">
               <Sliders className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-semibold text-white text-base">Hotel Yield & Surge Pricing Algorithm</h3>
-              <p className="text-xs text-slate-400">
-                Automatic rate adjustments based on day of week and real-time hotel occupancy
+              <h3 className="font-extrabold text-midnight-ink text-base tracking-tight">
+                Hotel Yield & Surge Pricing Algorithm
+              </h3>
+              <p className="text-xs text-slate-mute">
+                Automatic rate adjustments based on day of week and hotel occupancy
               </p>
             </div>
           </div>
 
           <button
             onClick={savePricingRules}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs shadow-lg shadow-sky-600/20 transition"
+            className="btn-lime text-xs px-5 py-2.5"
           >
-            {savedSuccess ? <Check className="w-4 h-4 text-emerald-300" /> : <Save className="w-4 h-4" />}
+            {savedSuccess ? <Check className="w-4 h-4 text-midnight-ink" /> : <Save className="w-4 h-4" />}
             <span>{savedSuccess ? "Rules Applied!" : "Apply Dynamic Rules"}</span>
           </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
           {/* Weekend Multiplier */}
-          <div className="bg-slate-900/80 p-4 rounded-xl border border-slate-700/60 space-y-2">
+          <div className="bg-bone-canvas p-4 rounded-2xl border border-slate-200/80 space-y-2">
             <div className="flex items-center justify-between">
-              <span className="font-semibold text-slate-300">Weekend Surcharge</span>
-              <span className="font-mono text-sky-400 font-bold">
+              <span className="font-bold text-midnight-ink">Weekend Surcharge</span>
+              <span className="font-black text-midnight-ink font-mono text-sm">
                 +{Math.round((pricingRules.weekendMultiplier - 1) * 100)}%
               </span>
             </div>
-            <p className="text-[11px] text-slate-400">
+            <p className="text-[11px] text-slate-mute">
               Applied automatically to Friday & Saturday night stays.
             </p>
             <input
@@ -148,9 +148,9 @@ export default function ManagerDashboard() {
               onChange={(e) =>
                 setPricingRules({ ...pricingRules, weekendMultiplier: parseFloat(e.target.value) })
               }
-              className="w-full accent-sky-500 cursor-pointer"
+              className="w-full accent-midnight-ink cursor-pointer"
             />
-            <div className="text-[10px] text-slate-500 flex justify-between font-mono">
+            <div className="text-[10px] text-slate-mute flex justify-between font-bold">
               <span>1.0x (0%)</span>
               <span>1.25x (+25%)</span>
               <span>1.5x (+50%)</span>
@@ -158,14 +158,14 @@ export default function ManagerDashboard() {
           </div>
 
           {/* Seasonal Multiplier */}
-          <div className="bg-slate-900/80 p-4 rounded-xl border border-slate-700/60 space-y-2">
+          <div className="bg-bone-canvas p-4 rounded-2xl border border-slate-200/80 space-y-2">
             <div className="flex items-center justify-between">
-              <span className="font-semibold text-slate-300">Peak Season Multiplier</span>
-              <span className="font-mono text-sky-400 font-bold">
+              <span className="font-bold text-midnight-ink">Peak Season Multiplier</span>
+              <span className="font-black text-midnight-ink font-mono text-sm">
                 {pricingRules.seasonalMultiplier}x
               </span>
             </div>
-            <p className="text-[11px] text-slate-400">
+            <p className="text-[11px] text-slate-mute">
               High holiday season / local event base rate factor.
             </p>
             <input
@@ -177,9 +177,9 @@ export default function ManagerDashboard() {
               onChange={(e) =>
                 setPricingRules({ ...pricingRules, seasonalMultiplier: parseFloat(e.target.value) })
               }
-              className="w-full accent-sky-500 cursor-pointer"
+              className="w-full accent-midnight-ink cursor-pointer"
             />
-            <div className="text-[10px] text-slate-500 flex justify-between font-mono">
+            <div className="text-[10px] text-slate-mute flex justify-between font-bold">
               <span>0.8x (Low)</span>
               <span>1.0x (Standard)</span>
               <span>1.5x (Peak)</span>
@@ -187,14 +187,14 @@ export default function ManagerDashboard() {
           </div>
 
           {/* Surge Occupancy Threshold */}
-          <div className="bg-slate-900/80 p-4 rounded-xl border border-slate-700/60 space-y-2">
+          <div className="bg-bone-canvas p-4 rounded-2xl border border-slate-200/80 space-y-2">
             <div className="flex items-center justify-between">
-              <span className="font-semibold text-slate-300">Surge Trigger Threshold</span>
-              <span className="font-mono text-amber-400 font-bold">
+              <span className="font-bold text-midnight-ink">Surge Trigger Threshold</span>
+              <span className="font-black text-midnight-ink font-mono text-sm">
                 {Math.round(pricingRules.surgeThreshold * 100)}% Occ.
               </span>
             </div>
-            <p className="text-[11px] text-slate-400">
+            <p className="text-[11px] text-slate-mute">
               Activates surge pricing when total hotel occupancy exceeds this rate.
             </p>
             <input
@@ -206,9 +206,9 @@ export default function ManagerDashboard() {
               onChange={(e) =>
                 setPricingRules({ ...pricingRules, surgeThreshold: parseFloat(e.target.value) })
               }
-              className="w-full accent-amber-500 cursor-pointer"
+              className="w-full accent-midnight-ink cursor-pointer"
             />
-            <div className="text-[10px] text-slate-500 flex justify-between font-mono">
+            <div className="text-[10px] text-slate-mute flex justify-between font-bold">
               <span>50%</span>
               <span>80% (Default)</span>
               <span>95%</span>
@@ -216,15 +216,15 @@ export default function ManagerDashboard() {
           </div>
 
           {/* High Occupancy Surge Multiplier */}
-          <div className="bg-slate-900/80 p-4 rounded-xl border border-slate-700/60 space-y-2">
+          <div className="bg-bone-canvas p-4 rounded-2xl border border-slate-200/80 space-y-2">
             <div className="flex items-center justify-between">
-              <span className="font-semibold text-slate-300">High Occupancy Surge</span>
-              <span className="font-mono text-emerald-400 font-bold">
+              <span className="font-bold text-midnight-ink">High Occupancy Surge</span>
+              <span className="font-black text-midnight-ink font-mono text-sm">
                 +{Math.round((pricingRules.surgeMultiplier - 1) * 100)}%
               </span>
             </div>
-            <p className="text-[11px] text-slate-400">
-              Additional markup dynamically applied during high occupancy spikes.
+            <p className="text-[11px] text-slate-mute">
+              Markup applied dynamically during high occupancy spikes.
             </p>
             <input
               type="range"
@@ -235,9 +235,9 @@ export default function ManagerDashboard() {
               onChange={(e) =>
                 setPricingRules({ ...pricingRules, surgeMultiplier: parseFloat(e.target.value) })
               }
-              className="w-full accent-emerald-500 cursor-pointer"
+              className="w-full accent-midnight-ink cursor-pointer"
             />
-            <div className="text-[10px] text-slate-500 flex justify-between font-mono">
+            <div className="text-[10px] text-slate-mute flex justify-between font-bold">
               <span>1.05x (+5%)</span>
               <span>1.25x (+25%)</span>
               <span>1.5x (+50%)</span>
@@ -247,23 +247,25 @@ export default function ManagerDashboard() {
       </div>
 
       {/* Room Inventory & Base Rates Matrix */}
-      <div className="bg-slate-800/50 p-5 rounded-2xl border border-slate-700/80">
+      <div className="card-plaster">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="font-semibold text-white text-base flex items-center gap-2">
-              <BedDouble className="w-4 h-4 text-sky-400" />
+            <h3 className="font-extrabold text-midnight-ink text-base tracking-tight flex items-center gap-2">
+              <BedDouble className="w-4 h-4 text-midnight-ink" />
               Room Inventory & Base Nightly Rates
             </h3>
-            <p className="text-xs text-slate-400">
-              Directly adjust base room rates and view real-time occupancy state
+            <p className="text-xs text-slate-mute">
+              Adjust base room rates and view real-time occupancy state
             </p>
           </div>
-          <span className="text-xs text-slate-400 font-mono">{rooms.length} Total Rooms</span>
+          <span className="text-xs font-bold text-midnight-ink bg-bone-canvas px-3 py-1 rounded-full">
+            {rooms.length} Rooms
+          </span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-900/70 text-slate-400 font-semibold uppercase tracking-wider border-b border-slate-700/80">
+            <thead className="bg-bone-canvas text-slate-mute font-bold uppercase tracking-wider border-b border-slate-200">
               <tr>
                 <th className="p-3">Room</th>
                 <th className="p-3">Category</th>
@@ -273,25 +275,25 @@ export default function ManagerDashboard() {
                 <th className="p-3">Base Price ($ / nt)</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-700/50">
+            <tbody className="divide-y divide-slate-100">
               {rooms.map((room) => (
-                <tr key={room._id} className="hover:bg-slate-900/40 transition">
-                  <td className="p-3 font-bold text-white">#{room.roomNumber}</td>
-                  <td className="p-3 text-slate-300 font-medium">{room.category}</td>
-                  <td className="p-3 text-slate-400">
+                <tr key={room._id} className="hover:bg-bone-canvas/50 transition">
+                  <td className="p-3 font-black text-midnight-ink text-sm">#{room.roomNumber}</td>
+                  <td className="p-3 text-midnight-ink font-bold">{room.category}</td>
+                  <td className="p-3 text-slate-mute font-medium">
                     Floor {room.floor} &bull; {room.bedType}
                   </td>
-                  <td className="p-3 text-slate-400">
+                  <td className="p-3 text-slate-mute font-medium">
                     {room.maxOccupancy?.adults || 2} Adults, {room.maxOccupancy?.children || 1} Children
                   </td>
                   <td className="p-3">
                     <span
-                      className={`px-2 py-0.5 rounded text-[10px] font-semibold uppercase ${
+                      className={`px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase ${
                         room.status === "occupied"
-                          ? "bg-sky-950 text-sky-300 border border-sky-800"
+                          ? "bg-cobalt-signal text-plaster-white"
                           : room.status === "reserved"
-                          ? "bg-amber-950 text-amber-300 border border-amber-800"
-                          : "bg-emerald-950 text-emerald-300 border border-emerald-800"
+                          ? "bg-saffron text-midnight-ink"
+                          : "bg-voltage-lime text-midnight-ink"
                       }`}
                     >
                       {room.status}
@@ -299,12 +301,12 @@ export default function ManagerDashboard() {
                   </td>
                   <td className="p-3">
                     <div className="flex items-center gap-1.5 w-32">
-                      <span className="text-slate-400">$</span>
+                      <span className="text-slate-mute font-bold">$</span>
                       <input
                         type="number"
                         defaultValue={room.basePrice}
                         onBlur={(e) => handleBasePriceChange(room._id, e.target.value)}
-                        className="w-20 bg-slate-900 border border-slate-700 rounded px-2 py-1 text-white font-mono focus:outline-none focus:border-sky-500"
+                        className="w-20 bg-bone-canvas border border-slate-300 rounded-lg px-2 py-1 text-midnight-ink font-mono font-bold focus:outline-none focus:border-midnight-ink"
                       />
                     </div>
                   </td>

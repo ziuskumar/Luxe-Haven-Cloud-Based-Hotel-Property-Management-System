@@ -40,32 +40,32 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-bone-canvas text-midnight-ink flex flex-col selection:bg-voltage-lime selection:text-midnight-ink">
       {/* Real-Time Toast Notification Popup (Socket.IO) */}
       {toastAlert && (
-        <div className="fixed bottom-5 right-5 z-50 max-w-sm w-full bg-slate-800 border-2 border-sky-500 rounded-2xl p-4 shadow-2xl flex items-start justify-between gap-3 animate-bounce">
-          <div className="flex items-start gap-2.5">
-            <div className="p-2 rounded-xl bg-sky-500/20 text-sky-400">
-              <Bell className="w-5 h-5 animate-pulse" />
+        <div className="fixed bottom-6 right-6 z-50 max-w-sm w-full card-plaster p-4 border border-cement-gray flex items-start justify-between gap-3 animate-in slide-in-from-bottom-5">
+          <div className="flex items-start gap-3">
+            <div className="p-2.5 rounded-full bg-voltage-lime text-midnight-ink">
+              <Bell className="w-4 h-4 animate-bounce" />
             </div>
             <div>
-              <span className="text-[10px] uppercase font-mono tracking-wider font-bold text-sky-400">
-                Socket.IO Live Alert
+              <span className="text-[10px] uppercase font-mono tracking-wider font-black text-midnight-ink bg-voltage-lime px-2 py-0.5 rounded-full">
+                Socket.IO Live
               </span>
-              <h4 className="text-sm font-bold text-white mt-0.5">{toastAlert.title}</h4>
-              <p className="text-xs text-slate-300 mt-1 leading-relaxed">{toastAlert.message}</p>
+              <h4 className="text-sm font-black text-midnight-ink mt-1.5 font-display">{toastAlert.title}</h4>
+              <p className="text-xs text-slate-mute mt-0.5 leading-relaxed font-medium">{toastAlert.message}</p>
             </div>
           </div>
           <button
             onClick={() => setToastAlert(null)}
-            className="text-slate-400 hover:text-white text-sm"
+            className="w-7 h-7 rounded-full bg-bone-canvas hover:bg-cement-gray text-midnight-ink flex items-center justify-center transition"
           >
-            <X className="w-4 h-4" />
+            <X className="w-3.5 h-3.5" />
           </button>
         </div>
       )}
 
-      {/* Main Navbar */}
+      {/* Floating Main Navbar */}
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -88,16 +88,18 @@ export default function App() {
         {activeTab === "users" && isAdmin && <UsersList />}
       </main>
 
-      {/* Footer */}
-      <footer className="bg-slate-950 border-t border-slate-800/80 py-6 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p>&copy; {new Date().getFullYear()} Luxe Haven Cloud-Based Hotel Property Management System (PMS).</p>
-          <div className="flex items-center gap-4 text-slate-400">
+      {/* Clean Editorial Footer */}
+      <footer className="bg-plaster-white border-t border-cement-gray py-6 text-xs text-slate-mute">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="font-bold text-midnight-ink">
+            &copy; {new Date().getFullYear()} Luxe Haven &mdash; Cloud-Based Hotel Property Management System (PMS).
+          </p>
+          <div className="flex items-center gap-4 text-xs font-semibold text-slate-mute">
             <span>GST HSN: 9963</span>
             <span>&bull;</span>
             <span>REST API + Socket.IO</span>
             <span>&bull;</span>
-            <span>JWT RBAC Enabled</span>
+            <span className="text-midnight-ink font-bold">JWT RBAC Enabled</span>
           </div>
         </div>
       </footer>

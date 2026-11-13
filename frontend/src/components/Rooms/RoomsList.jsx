@@ -3,14 +3,8 @@ import API from "../../api";
 import BookingModal from "./BookingModal";
 import {
   Search,
-  Filter,
   BedDouble,
   Users,
-  CheckCircle,
-  Wifi,
-  Tv,
-  Sparkles,
-  Calendar,
   Layers,
 } from "lucide-react";
 
@@ -63,60 +57,60 @@ export default function RoomsList({ onBookingComplete }) {
 
   return (
     <div className="space-y-6">
-      {/* Header & Filter Bar */}
-      <div className="bg-slate-800/40 p-5 rounded-3xl border border-slate-700/60 space-y-4">
+      {/* Header & Filter Bar - Plaster White (#ffffff) */}
+      <div className="card-plaster space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold font-serif text-white tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-midnight-ink flex items-center gap-2">
               Luxury Rooms & Real-Time Availability
-              <span className="text-xs font-sans font-semibold bg-sky-950 text-sky-400 border border-sky-800 px-2.5 py-0.5 rounded-full">
+              <span className="text-[11px] font-bold bg-voltage-lime text-midnight-ink px-3 py-0.5 rounded-full">
                 Live Engine
               </span>
             </h1>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Select your travel dates to view real-time vacant rooms with double-booking prevention
+            <p className="text-xs text-slate-mute mt-1 font-medium">
+              Filter by dates to verify real-time vacancies with double-booking prevention
             </p>
           </div>
 
           <div className="relative w-full sm:w-72">
-            <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" />
+            <Search className="w-3.5 h-3.5 absolute left-3.5 top-3 text-slate-mute" />
             <input
               type="text"
-              placeholder="Search by room title, number, or amenity..."
+              placeholder="Search room title or number..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && fetchRooms()}
-              className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500"
+              className="w-full bg-bone-canvas border border-slate-200 rounded-lg pl-9 pr-3 py-2 text-xs text-midnight-ink placeholder-slate-mute focus:outline-none focus:border-midnight-ink"
             />
           </div>
         </div>
 
         {/* Date Filter & Price Range */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-slate-700/60 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-slate-100 text-xs">
           <div>
-            <label className="block text-slate-400 mb-1 font-medium">Check-In Date</label>
+            <label className="block text-midnight-ink mb-1 font-bold">Check-In Date</label>
             <input
               type="date"
               value={checkInDate}
               onChange={(e) => setCheckInDate(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-white focus:outline-none focus:border-sky-500"
+              className="w-full bg-bone-canvas border border-slate-300 rounded-lg p-2 text-midnight-ink font-semibold focus:outline-none focus:border-midnight-ink"
             />
           </div>
 
           <div>
-            <label className="block text-slate-400 mb-1 font-medium">Check-Out Date</label>
+            <label className="block text-midnight-ink mb-1 font-bold">Check-Out Date</label>
             <input
               type="date"
               value={checkOutDate}
               onChange={(e) => setCheckOutDate(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-white focus:outline-none focus:border-sky-500"
+              className="w-full bg-bone-canvas border border-slate-300 rounded-lg p-2 text-midnight-ink font-semibold focus:outline-none focus:border-midnight-ink"
             />
           </div>
 
           <div>
-            <div className="flex justify-between text-slate-400 mb-1">
-              <span className="font-medium">Max Nightly Rate:</span>
-              <span className="font-mono text-sky-400 font-bold">${maxPrice}</span>
+            <div className="flex justify-between text-midnight-ink mb-1">
+              <span className="font-bold">Max Rate:</span>
+              <span className="font-mono text-midnight-ink font-black">${maxPrice}</span>
             </div>
             <input
               type="range"
@@ -125,21 +119,21 @@ export default function RoomsList({ onBookingComplete }) {
               step="50"
               value={maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value))}
-              className="w-full accent-sky-500 cursor-pointer mt-1.5"
+              className="w-full accent-midnight-ink cursor-pointer mt-1"
             />
           </div>
         </div>
 
         {/* Category Pills */}
-        <div className="flex flex-wrap gap-1.5 pt-1">
+        <div className="flex flex-wrap gap-2 pt-1">
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition ${
+              className={`px-4 py-1.5 rounded-full text-xs font-bold transition ${
                 selectedCategory === cat
-                  ? "bg-sky-600 text-white font-semibold shadow-md shadow-sky-600/30"
-                  : "bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800"
+                  ? "bg-midnight-ink text-plaster-white"
+                  : "bg-bone-canvas text-midnight-ink hover:bg-slate-200"
               }`}
             >
               {cat}
@@ -151,11 +145,11 @@ export default function RoomsList({ onBookingComplete }) {
       {/* Rooms Cards Grid */}
       {loading ? (
         <div className="flex items-center justify-center min-h-[300px]">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-500"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-midnight-ink"></div>
         </div>
       ) : rooms.length === 0 ? (
-        <div className="p-12 text-center bg-slate-800/30 rounded-3xl border border-slate-800 text-slate-400 text-sm">
-          No rooms match the chosen availability dates or filters. Try adjusting your dates or price range.
+        <div className="card-plaster p-12 text-center text-slate-mute text-xs">
+          No rooms match the chosen dates or filters. Try adjusting your dates.
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -168,31 +162,31 @@ export default function RoomsList({ onBookingComplete }) {
             return (
               <div
                 key={room._id}
-                className="bg-slate-800/60 rounded-3xl border border-slate-700/80 overflow-hidden shadow-lg flex flex-col justify-between hover:border-slate-600 transition group"
+                className="card-plaster flex flex-col justify-between overflow-hidden p-0 border border-slate-200 hover:border-slate-400 transition group"
               >
                 <div>
-                  {/* Photo & Badges */}
-                  <div className="relative h-52 w-full overflow-hidden">
+                  {/* Photo Container */}
+                  <div className="relative h-56 w-full overflow-hidden rounded-t-[30px]">
                     <img
                       src={img}
                       alt={room.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                     />
                     <div className="absolute top-3 left-3 flex gap-1.5">
-                      <span className="px-2.5 py-1 rounded-lg bg-slate-950/80 backdrop-blur text-sky-400 text-xs font-bold font-mono">
-                        Room #{room.roomNumber}
+                      <span className="px-3 py-1 rounded-full bg-midnight-ink text-voltage-lime text-xs font-black font-mono">
+                        #{room.roomNumber}
                       </span>
-                      <span className="px-2.5 py-1 rounded-lg bg-slate-950/80 backdrop-blur text-slate-200 text-xs font-semibold">
+                      <span className="px-3 py-1 rounded-full bg-plaster-white/95 backdrop-blur text-midnight-ink text-xs font-extrabold">
                         {room.category}
                       </span>
                     </div>
 
                     <div className="absolute bottom-3 right-3">
                       <span
-                        className={`px-2.5 py-1 rounded-lg text-xs font-semibold uppercase backdrop-blur ${
+                        className={`px-3 py-1 rounded-full text-xs font-bold uppercase ${
                           room.housekeepingStatus === "clean" || room.housekeepingStatus === "inspected"
-                            ? "bg-emerald-950/90 text-emerald-300 border border-emerald-800"
-                            : "bg-amber-950/90 text-amber-300 border border-amber-800"
+                            ? "bg-voltage-lime text-midnight-ink"
+                            : "bg-saffron text-midnight-ink"
                         }`}
                       >
                         {room.housekeepingStatus}
@@ -201,23 +195,23 @@ export default function RoomsList({ onBookingComplete }) {
                   </div>
 
                   {/* Room Details */}
-                  <div className="p-5 space-y-3">
-                    <h3 className="font-bold text-white text-lg font-serif">{room.title}</h3>
-                    <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                  <div className="p-6 space-y-3">
+                    <h3 className="font-extrabold text-midnight-ink text-xl tracking-tight">{room.title}</h3>
+                    <p className="text-xs text-slate-mute line-clamp-2 leading-relaxed">
                       {room.description || "Luxury suite with plush furnishings and modern amenities."}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 text-[11px] text-slate-300">
-                      <span className="flex items-center gap-1 bg-slate-900/90 px-2 py-1 rounded-md border border-slate-700">
-                        <Users className="w-3 h-3 text-sky-400" />
+                    <div className="flex flex-wrap gap-2 text-[11px] text-midnight-ink font-bold pt-1">
+                      <span className="flex items-center gap-1 bg-bone-canvas px-3 py-1 rounded-full">
+                        <Users className="w-3 h-3 text-slate-mute" />
                         Up to {room.maxOccupancy?.adults || 2} Guests
                       </span>
-                      <span className="flex items-center gap-1 bg-slate-900/90 px-2 py-1 rounded-md border border-slate-700">
-                        <BedDouble className="w-3 h-3 text-sky-400" />
+                      <span className="flex items-center gap-1 bg-bone-canvas px-3 py-1 rounded-full">
+                        <BedDouble className="w-3 h-3 text-slate-mute" />
                         {room.bedType} Bed
                       </span>
-                      <span className="flex items-center gap-1 bg-slate-900/90 px-2 py-1 rounded-md border border-slate-700">
-                        <Layers className="w-3 h-3 text-sky-400" />
+                      <span className="flex items-center gap-1 bg-bone-canvas px-3 py-1 rounded-full">
+                        <Layers className="w-3 h-3 text-slate-mute" />
                         Floor {room.floor}
                       </span>
                     </div>
@@ -225,7 +219,7 @@ export default function RoomsList({ onBookingComplete }) {
                     {/* Amenities pills */}
                     <div className="flex flex-wrap gap-1 pt-1">
                       {(room.amenities || []).slice(0, 3).map((a) => (
-                        <span key={a} className="text-[10px] text-slate-400 bg-slate-900/60 px-2 py-0.5 rounded">
+                        <span key={a} className="text-[10px] text-slate-mute bg-bone-canvas px-2.5 py-0.5 rounded-full font-medium">
                           {a}
                         </span>
                       ))}
@@ -233,19 +227,19 @@ export default function RoomsList({ onBookingComplete }) {
                   </div>
                 </div>
 
-                {/* Card Footer: Pricing & Action */}
-                <div className="p-5 pt-0 border-t border-slate-700/50 mt-4 flex items-center justify-between">
+                {/* Card Footer */}
+                <div className="p-6 pt-0 border-t border-slate-100 mt-4 flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] uppercase text-slate-400 tracking-wider">Base Rate</span>
+                    <span className="text-[10px] uppercase font-bold text-slate-mute tracking-wider">Base Rate</span>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-xl font-bold font-mono text-white">${room.basePrice}</span>
-                      <span className="text-xs text-slate-400">/ night</span>
+                      <span className="text-2xl font-black font-mono text-midnight-ink">${room.basePrice}</span>
+                      <span className="text-xs text-slate-mute font-semibold">/ nt</span>
                     </div>
                   </div>
 
                   <button
                     onClick={() => setBookingRoom(room)}
-                    className="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-md shadow-sky-600/20 transition flex items-center gap-1.5"
+                    className="btn-lime text-xs px-5 py-2.5"
                   >
                     <span>Reserve Room</span>
                   </button>

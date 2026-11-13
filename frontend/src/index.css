@@ -2,13 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Colors from Design.md / style.css */
+  --color-voltage-lime: #d2e823;
+  --color-cobalt-signal: #2665d6;
+  --color-bordeaux-maroon: #780016;
+  --color-midnight-ink: #1e2330;
+  --color-plaster-white: #ffffff;
+  --color-bone-canvas: #f3f3f1;
+  --color-cement-gray: #adadad;
+  --color-slate-mute: #676b5f;
+  --color-carbon: #222222;
+  --color-lilac-whisper: #e9c0e9;
+  --color-indigo-abyss: #061492;
+  --color-forest-depth: #254f1a;
+  --color-saffron: #d6a337;
+
+  /* Typography */
+  --font-sans: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  
+  /* Radii */
+  --radius-card: 32px;
+  --radius-pill: 9999px;
+  --radius-input: 8px;
+}
+
 @layer base {
   body {
-    @apply bg-slate-900 text-slate-100 antialiased;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--color-bone-canvas);
+    color: var(--color-midnight-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.16px;
   }
-  h1, h2, h3, .font-serif {
-    font-family: 'Playfair Display', serif;
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.03em;
+    font-weight: 800;
   }
 }
 
@@ -18,55 +48,93 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #f3f3f1;
 }
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #adadad;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #676b5f;
 }
 
-/* FullCalendar Dark/Modern Theme Overrides */
+/* Design.md Reusable Button & Card Utility Classes */
+@layer components {
+  /* Voltage Lime Signature Action Button */
+  .btn-lime {
+    @apply bg-voltage-lime text-midnight-ink font-bold text-sm px-6 py-3 rounded-full transition-all duration-150 inline-flex items-center justify-center gap-2 hover:bg-[#b8c91b] active:scale-[0.98];
+  }
+
+  /* Black Action Button */
+  .btn-black {
+    @apply bg-carbon text-plaster-white font-semibold text-sm px-5 py-2.5 rounded-full transition-all duration-150 inline-flex items-center justify-center gap-2 hover:bg-black active:scale-[0.98];
+  }
+
+  /* Ghost Text Button */
+  .btn-ghost {
+    @apply text-midnight-ink font-semibold text-sm px-4 py-2 rounded-full transition-all duration-150 hover:underline inline-flex items-center justify-center gap-2;
+  }
+
+  /* Editorial Card Surface */
+  .card-plaster {
+    @apply bg-plaster-white rounded-card p-6 border border-slate-200/80;
+  }
+
+  /* Full-bleed Color Section Header Box */
+  .color-block-cobalt {
+    @apply bg-cobalt-signal text-plaster-white rounded-[32px] p-6 sm:p-8;
+  }
+
+  .color-block-maroon {
+    @apply bg-bordeaux-maroon text-plaster-white rounded-[32px] p-6 sm:p-8;
+  }
+
+  .color-block-lime {
+    @apply bg-voltage-lime text-midnight-ink rounded-[32px] p-6 sm:p-8;
+  }
+}
+
+/* FullCalendar Editorial Modern Theme Overrides */
 .fc {
-  --fc-border-color: #334155;
-  --fc-page-bg-color: #0f172a;
-  --fc-neutral-bg-color: #1e293b;
-  --fc-neutral-text-color: #94a3b8;
-  --fc-today-bg-color: rgba(14, 165, 233, 0.08);
+  --fc-border-color: #e2e8f0;
+  --fc-page-bg-color: #ffffff;
+  --fc-neutral-bg-color: #f8fafc;
+  --fc-neutral-text-color: #1e2330;
+  --fc-today-bg-color: rgba(210, 232, 35, 0.18);
   font-family: inherit;
 }
 .fc-toolbar-title {
-  font-size: 1.25rem !important;
-  font-weight: 700 !important;
-  color: #f8fafc;
+  font-size: 1.35rem !important;
+  font-weight: 800 !important;
+  color: #1e2330;
+  letter-spacing: -0.5px;
 }
 .fc-button-primary {
-  background-color: #0284c7 !important;
-  border-color: #0284c7 !important;
-  font-weight: 600 !important;
-  border-radius: 0.5rem !important;
+  background-color: #1e2330 !important;
+  border-color: #1e2330 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border-radius: 9999px !important;
   text-transform: capitalize;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  padding: 6px 16px !important;
 }
 .fc-button-primary:hover {
-  background-color: #0369a1 !important;
-  border-color: #0369a1 !important;
+  background-color: #222222 !important;
 }
 .fc-button-active {
-  background-color: #0c4a6e !important;
-  border-color: #0c4a6e !important;
+  background-color: #d2e823 !important;
+  border-color: #d2e823 !important;
+  color: #1e2330 !important;
 }
 .fc-event {
-  border-radius: 6px !important;
-  padding: 2px 6px !important;
+  border-radius: 9999px !important;
+  padding: 2px 10px !important;
   font-size: 0.8rem !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   cursor: pointer;
-  transition: transform 0.15s ease;
+  border: none !important;
+  transition: transform 0.1s ease;
 }
 .fc-event:hover {
   transform: translateY(-1px);
-  filter: brightness(1.1);
 }

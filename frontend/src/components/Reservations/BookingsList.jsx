@@ -12,6 +12,7 @@ import {
   Filter,
   RefreshCw,
   Clock,
+  CheckCircle2,
 } from "lucide-react";
 
 export default function BookingsList({ onSelectBooking }) {
@@ -92,51 +93,54 @@ export default function BookingsList({ onSelectBooking }) {
   const getStatusBadge = (status) => {
     switch (status) {
       case "confirmed":
-        return "bg-emerald-950 text-emerald-300 border-emerald-800";
+        return "bg-forest-depth text-plaster-white";
       case "checked_in":
-        return "bg-sky-950 text-sky-300 border-sky-800";
+        return "bg-cobalt-signal text-plaster-white";
       case "checked_out":
-        return "bg-slate-800 text-slate-400 border-slate-700";
+        return "bg-cement-gray text-midnight-ink";
       case "cancelled":
-        return "bg-red-950 text-red-300 border-red-800";
+        return "bg-bordeaux-maroon text-plaster-white";
       default:
-        return "bg-amber-950 text-amber-300 border-amber-800";
+        return "bg-saffron text-midnight-ink";
     }
   };
 
   return (
     <div className="space-y-6">
-      {/* Header & Controls */}
-      <div className="bg-slate-800/40 p-5 rounded-3xl border border-slate-700/60 space-y-4">
+      {/* Header & Controls Card */}
+      <div className="card-plaster p-6 sm:p-8 space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold font-serif text-white tracking-tight flex items-center gap-2">
-              {isStaff ? "Central Reservation System (CRS)" : "My Bookings & Reservations"}
-              <span className="text-xs font-sans font-semibold bg-sky-950 text-sky-400 border border-sky-800 px-2.5 py-0.5 rounded-full">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-voltage-lime text-midnight-ink">
                 PMS Engine
               </span>
+              <span className="text-xs font-bold text-slate-mute">Reservation Management</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-black text-midnight-ink tracking-tight font-display">
+              {isStaff ? "Central Reservation System (CRS)" : "My Bookings & Reservations"}
             </h1>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Live reservations tracking, room keys, check-in / check-out workflows, and invoices
+            <p className="text-xs text-slate-mute mt-1">
+              Real-time reservations tracking, key card issuance, check-in / check-out workflows, and billing receipts.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="relative w-full sm:w-64">
-              <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" />
+            <div className="relative w-full sm:w-72">
+              <Search className="w-3.5 h-3.5 absolute left-3.5 top-3 text-slate-mute" />
               <input
                 type="text"
                 placeholder="Search booking # or guest name..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && fetchBookings()}
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500"
+                className="w-full bg-bone-canvas border border-cement-gray rounded-input pl-9 pr-3.5 py-2 text-xs text-midnight-ink placeholder-slate-mute focus:outline-none focus:border-midnight-ink font-medium"
               />
             </div>
 
             <button
               onClick={fetchBookings}
-              className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition"
+              className="p-2.5 rounded-full bg-bone-canvas hover:bg-cement-gray text-midnight-ink border border-cement-gray transition font-bold"
               title="Refresh Bookings"
             >
               <RefreshCw className="w-4 h-4" />
@@ -145,16 +149,16 @@ export default function BookingsList({ onSelectBooking }) {
         </div>
 
         {/* Status Filters */}
-        <div className="flex flex-wrap items-center gap-2 text-xs pt-1 border-t border-slate-700/60">
-          <span className="text-slate-400">Reservation Status:</span>
+        <div className="flex flex-wrap items-center gap-2 text-xs pt-3 border-t border-cement-gray">
+          <span className="text-slate-mute font-bold text-[11px] uppercase tracking-wider">Status:</span>
           {["all", "confirmed", "checked_in", "checked_out", "cancelled"].map((st) => (
             <button
               key={st}
               onClick={() => setStatusFilter(st)}
-              className={`px-3 py-1 rounded-full capitalize transition font-medium ${
+              className={`px-4 py-1.5 rounded-full capitalize transition font-bold text-xs ${
                 statusFilter === st
-                  ? "bg-sky-600 text-white font-semibold shadow-sm"
-                  : "bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white"
+                  ? "bg-midnight-ink text-plaster-white"
+                  : "bg-bone-canvas text-slate-mute hover:bg-cement-gray hover:text-midnight-ink"
               }`}
             >
               {st.replace(/_/g, " ")}
@@ -163,82 +167,82 @@ export default function BookingsList({ onSelectBooking }) {
         </div>
       </div>
 
-      {/* Bookings Table */}
-      <div className="bg-slate-800/50 rounded-3xl border border-slate-700/80 overflow-hidden shadow-xl">
+      {/* Bookings Table Card */}
+      <div className="card-plaster overflow-hidden">
         {loading ? (
-          <div className="flex items-center justify-center p-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-500"></div>
+          <div className="flex items-center justify-center p-16">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-midnight-ink"></div>
           </div>
         ) : bookings.length === 0 ? (
-          <div className="p-12 text-center text-slate-400 text-xs">
+          <div className="p-16 text-center text-slate-mute text-xs">
             No reservations found for this filter.
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-900/80 text-slate-400 font-semibold uppercase tracking-wider border-b border-slate-700/80">
+              <thead className="bg-bone-canvas text-slate-mute font-bold uppercase tracking-wider text-[11px] border-b border-cement-gray">
                 <tr>
-                  <th className="p-3.5">Ref #</th>
-                  <th className="p-3.5">Guest</th>
-                  <th className="p-3.5">Room</th>
-                  <th className="p-3.5">Dates & Nights</th>
-                  <th className="p-3.5">Key Card</th>
-                  <th className="p-3.5">Total & Payment</th>
-                  <th className="p-3.5">Status</th>
-                  <th className="p-3.5 text-right">Actions</th>
+                  <th className="p-4">Ref #</th>
+                  <th className="p-4">Guest</th>
+                  <th className="p-4">Room</th>
+                  <th className="p-4">Dates & Nights</th>
+                  <th className="p-4">Key Card</th>
+                  <th className="p-4">Total & Payment</th>
+                  <th className="p-4">Status</th>
+                  <th className="p-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-700/50">
+              <tbody className="divide-y divide-cement-gray/60 font-medium">
                 {bookings.map((b) => (
-                  <tr key={b._id} className="hover:bg-slate-900/40 transition">
-                    <td className="p-3.5 font-bold font-mono text-sky-400">
+                  <tr key={b._id} className="hover:bg-bone-canvas/60 transition">
+                    <td className="p-4 font-mono font-bold text-midnight-ink">
                       {b.bookingNumber}
                     </td>
-                    <td className="p-3.5">
-                      <div className="font-semibold text-white">{b.guestDetails?.name}</div>
-                      <div className="text-[11px] text-slate-400">{b.guestDetails?.email}</div>
+                    <td className="p-4">
+                      <div className="font-bold text-midnight-ink">{b.guestDetails?.name}</div>
+                      <div className="text-[11px] text-slate-mute">{b.guestDetails?.email}</div>
                     </td>
-                    <td className="p-3.5">
-                      <span className="font-semibold text-white">Room #{b.room?.roomNumber}</span>
-                      <div className="text-[11px] text-slate-400">{b.room?.category}</div>
+                    <td className="p-4">
+                      <span className="font-bold text-midnight-ink">Room #{b.room?.roomNumber}</span>
+                      <div className="text-[11px] text-slate-mute capitalize">{b.room?.category}</div>
                     </td>
-                    <td className="p-3.5 text-slate-300">
+                    <td className="p-4 text-midnight-ink font-medium">
                       <div>
                         {new Date(b.checkInDate).toLocaleDateString()} &rarr;{" "}
                         {new Date(b.checkOutDate).toLocaleDateString()}
                       </div>
-                      <div className="text-[11px] text-slate-400">{b.nights} Night(s)</div>
+                      <div className="text-[11px] text-slate-mute">{b.nights} Night(s)</div>
                     </td>
-                    <td className="p-3.5">
+                    <td className="p-4">
                       {b.roomKeyIssued ? (
-                        <span className="font-mono text-emerald-400 font-semibold bg-emerald-950/60 border border-emerald-800 px-2 py-0.5 rounded text-[11px]">
+                        <span className="font-mono text-midnight-ink font-bold bg-voltage-lime px-2.5 py-0.5 rounded-full text-[11px] inline-block">
                           {b.roomKeyNumber}
                         </span>
                       ) : (
-                        <span className="text-slate-500 italic">None</span>
+                        <span className="text-slate-mute italic">Not Issued</span>
                       )}
                     </td>
-                    <td className="p-3.5">
-                      <div className="font-bold text-white font-mono">${b.pricing?.totalAmount}</div>
-                      <div className="text-[10px] text-emerald-400 uppercase font-semibold">
+                    <td className="p-4">
+                      <div className="font-black text-midnight-ink font-mono">${b.pricing?.totalAmount}</div>
+                      <div className="text-[10px] text-forest-depth uppercase font-bold tracking-wider">
                         {b.paymentStatus}
                       </div>
                     </td>
-                    <td className="p-3.5">
+                    <td className="p-4">
                       <span
-                        className={`px-2.5 py-1 rounded text-[11px] font-semibold uppercase ${getStatusBadge(
+                        className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider inline-block ${getStatusBadge(
                           b.status
                         )}`}
                       >
                         {b.status.replace(/_/g, " ")}
                       </span>
                     </td>
-                    <td className="p-3.5 text-right">
+                    <td className="p-4 text-right">
                       <div className="flex items-center justify-end gap-1.5">
                         {/* Invoice download */}
                         <button
                           onClick={() => downloadInvoice(b._id)}
-                          className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-400 border border-slate-700 transition"
+                          className="p-2 rounded-full bg-bone-canvas hover:bg-cement-gray text-midnight-ink border border-cement-gray transition"
                           title="Download Invoice PDF"
                         >
                           <FileDown className="w-3.5 h-3.5" />
@@ -248,7 +252,7 @@ export default function BookingsList({ onSelectBooking }) {
                         {isStaff && b.status === "confirmed" && (
                           <button
                             onClick={() => handleCheckIn(b._id, b.room?.roomNumber)}
-                            className="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-[11px] shadow transition"
+                            className="btn-lime text-xs px-3.5 py-1.5"
                           >
                             Check-In
                           </button>
@@ -257,7 +261,7 @@ export default function BookingsList({ onSelectBooking }) {
                         {isStaff && b.status === "checked_in" && (
                           <button
                             onClick={() => handleCheckOut(b._id)}
-                            className="px-2.5 py-1 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-semibold text-[11px] shadow transition"
+                            className="btn-black text-xs px-3.5 py-1.5"
                           >
                             Check-Out
                           </button>
@@ -266,7 +270,7 @@ export default function BookingsList({ onSelectBooking }) {
                         {b.status !== "checked_out" && b.status !== "cancelled" && (
                           <button
                             onClick={() => handleCancel(b._id)}
-                            className="p-1.5 rounded-lg bg-slate-800 hover:bg-red-950 text-slate-400 hover:text-red-400 border border-slate-700 transition"
+                            className="p-2 rounded-full bg-bone-canvas hover:bg-bordeaux-maroon/10 text-slate-mute hover:text-bordeaux-maroon transition"
                             title="Cancel Booking"
                           >
                             <XCircle className="w-3.5 h-3.5" />

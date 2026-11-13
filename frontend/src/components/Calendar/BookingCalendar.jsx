@@ -14,6 +14,7 @@ import {
   DollarSign,
   Tag,
   RefreshCw,
+  X,
 } from "lucide-react";
 
 export default function BookingCalendar() {
@@ -61,7 +62,7 @@ export default function BookingCalendar() {
   };
 
   const handleCheckOut = async (bookingId) => {
-    if (!window.confirm("Confirm check-out?")) return;
+    if (!window.confirm("Confirm check-out? Room will be set to dirty for housekeeping.")) return;
     try {
       await API.post(`/bookings/${bookingId}/check-out`);
       setSelectedEvent(null);
@@ -73,49 +74,54 @@ export default function BookingCalendar() {
 
   return (
     <div className="space-y-6">
-      {/* Calendar Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-800/40 p-4 rounded-2xl border border-slate-700/60">
-        <div>
-          <h1 className="text-2xl font-bold font-serif text-white tracking-tight flex items-center gap-2">
-            Interactive Reservation Calendar
-            <span className="text-xs font-sans font-semibold bg-sky-950 text-sky-400 border border-sky-800 px-2 py-0.5 rounded-full">
-              FullCalendar Engine
-            </span>
-          </h1>
-          <p className="text-xs text-slate-400 mt-0.5">
-            Daily, weekly, and monthly overview of room occupancy, upcoming arrivals, and checked-in guests
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          {/* Legend */}
-          <div className="hidden lg:flex items-center gap-3 text-[11px] bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-700">
-            <span className="flex items-center gap-1.5 text-slate-300">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Confirmed
-            </span>
-            <span className="flex items-center gap-1.5 text-slate-300">
-              <span className="w-2.5 h-2.5 rounded-full bg-sky-500"></span> Checked-In
-            </span>
-            <span className="flex items-center gap-1.5 text-slate-300">
-              <span className="w-2.5 h-2.5 rounded-full bg-slate-400"></span> Checked-Out
-            </span>
-            <span className="flex items-center gap-1.5 text-slate-300">
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Pending
-            </span>
+      {/* Calendar Header Card */}
+      <div className="card-plaster p-6 sm:p-8 space-y-4">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-voltage-lime text-midnight-ink">
+                FullCalendar v6
+              </span>
+              <span className="text-xs font-bold text-slate-mute">Dynamic Occupancy Grid</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-black text-midnight-ink tracking-tight font-display">
+              Interactive Reservation Calendar
+            </h1>
+            <p className="text-xs text-slate-mute mt-1">
+              Daily, weekly, and monthly view of guest arrivals, active stays, and room turnovers.
+            </p>
           </div>
 
-          <button
-            onClick={fetchEvents}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium border border-slate-700 transition"
-          >
-            <RefreshCw className="w-3.5 h-3.5" />
-            <span>Sync</span>
-          </button>
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Color Legend */}
+            <div className="flex items-center gap-2 text-[11px] bg-bone-canvas px-3.5 py-1.5 rounded-full border border-cement-gray font-bold">
+              <span className="flex items-center gap-1.5 text-midnight-ink">
+                <span className="w-2.5 h-2.5 rounded-full bg-forest-depth"></span> Confirmed
+              </span>
+              <span className="flex items-center gap-1.5 text-midnight-ink">
+                <span className="w-2.5 h-2.5 rounded-full bg-cobalt-signal"></span> Checked-In
+              </span>
+              <span className="flex items-center gap-1.5 text-midnight-ink">
+                <span className="w-2.5 h-2.5 rounded-full bg-slate-mute"></span> Checked-Out
+              </span>
+              <span className="flex items-center gap-1.5 text-midnight-ink">
+                <span className="w-2.5 h-2.5 rounded-full bg-saffron"></span> Pending
+              </span>
+            </div>
+
+            <button
+              onClick={fetchEvents}
+              className="btn-black text-xs px-4 py-2 flex items-center gap-1.5"
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+              <span>Sync Feed</span>
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Main FullCalendar Component */}
-      <div className="bg-slate-800/50 p-5 rounded-2xl border border-slate-700/80 shadow-xl">
+      {/* Main FullCalendar Card */}
+      <div className="card-plaster p-6 sm:p-8 overflow-hidden">
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
@@ -135,62 +141,66 @@ export default function BookingCalendar() {
 
       {/* Booking Details Modal on Event Click */}
       {selectedEvent && (
-        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="fixed inset-0 z-50 bg-midnight-ink/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="card-plaster max-w-lg w-full p-6 sm:p-8 space-y-5 border border-cement-gray animate-in fade-in zoom-in-95 duration-150">
+            <div className="flex items-start justify-between border-b border-cement-gray pb-4">
               <div>
-                <span className="text-[10px] font-mono uppercase bg-slate-800 text-slate-400 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-mono font-black uppercase bg-bone-canvas text-slate-mute px-2.5 py-1 rounded-full border border-cement-gray">
                   {selectedEvent.bookingNumber}
                 </span>
-                <h3 className="font-bold text-white text-lg mt-1 font-serif">
+                <h3 className="text-xl font-black text-midnight-ink mt-2 font-display">
                   Room #{selectedEvent.room?.roomNumber} - {selectedEvent.room?.title}
                 </h3>
               </div>
               <button
                 onClick={() => setSelectedEvent(null)}
-                className="text-slate-400 hover:text-white text-sm"
+                className="w-8 h-8 rounded-full bg-bone-canvas hover:bg-cement-gray text-midnight-ink flex items-center justify-center transition"
               >
-                ✕
+                <X className="w-4 h-4" />
               </button>
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-xs">
-              <div className="p-3 rounded-lg bg-slate-800/80 border border-slate-700 space-y-1">
-                <span className="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Guest Information</span>
-                <p className="text-white font-semibold">{selectedEvent.guestDetails?.name}</p>
-                <p className="text-slate-400">{selectedEvent.guestDetails?.email}</p>
-                <p className="text-slate-400">{selectedEvent.guestDetails?.phone || "No phone provided"}</p>
+              <div className="p-4 rounded-input bg-bone-canvas border border-cement-gray space-y-1">
+                <span className="text-slate-mute text-[10px] uppercase font-black tracking-wider">
+                  Guest Information
+                </span>
+                <p className="text-midnight-ink font-bold text-sm">{selectedEvent.guestDetails?.name}</p>
+                <p className="text-slate-mute truncate">{selectedEvent.guestDetails?.email}</p>
+                <p className="text-slate-mute">{selectedEvent.guestDetails?.phone || "No phone provided"}</p>
               </div>
 
-              <div className="p-3 rounded-lg bg-slate-800/80 border border-slate-700 space-y-1">
-                <span className="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Stay Schedule</span>
-                <p className="text-white font-semibold">
+              <div className="p-4 rounded-input bg-bone-canvas border border-cement-gray space-y-1">
+                <span className="text-slate-mute text-[10px] uppercase font-black tracking-wider">
+                  Stay Schedule
+                </span>
+                <p className="text-midnight-ink font-bold">
                   {new Date(selectedEvent.start).toLocaleDateString()} &rarr; {new Date(selectedEvent.end).toLocaleDateString()}
                 </p>
-                <p className="text-slate-400">{selectedEvent.nights} Night(s)</p>
-                <p className="text-slate-400">Key: {selectedEvent.roomKeyNumber || "Not Issued"}</p>
+                <p className="text-slate-mute font-medium">{selectedEvent.nights} Night(s)</p>
+                <p className="text-midnight-ink font-mono font-semibold">Key: {selectedEvent.roomKeyNumber || "Not Issued"}</p>
               </div>
             </div>
 
-            <div className="p-3 rounded-lg bg-slate-800/50 border border-slate-700/60 flex items-center justify-between text-xs">
+            <div className="p-4 rounded-input bg-bone-canvas border border-cement-gray flex items-center justify-between text-xs">
               <div>
-                <span className="text-slate-400">Current Status:</span>
-                <span className="font-bold text-white uppercase ml-2 px-2 py-0.5 rounded bg-slate-800 border border-slate-700">
+                <span className="text-slate-mute font-bold uppercase text-[10px] block">Status</span>
+                <span className="font-black text-midnight-ink uppercase px-2.5 py-0.5 rounded-full bg-voltage-lime text-[11px] inline-block mt-0.5">
                   {selectedEvent.status}
                 </span>
               </div>
-              <div>
-                <span className="text-slate-400">Total Billed:</span>
-                <span className="font-bold text-emerald-400 text-sm ml-2 font-mono">
+              <div className="text-right">
+                <span className="text-slate-mute font-bold uppercase text-[10px] block">Total Charged</span>
+                <span className="font-black text-midnight-ink text-lg font-mono">
                   ${selectedEvent.totalAmount}
                 </span>
               </div>
             </div>
 
-            <div className="flex justify-end gap-2 pt-2 border-t border-slate-800">
+            <div className="flex justify-end gap-2 pt-2 border-t border-cement-gray">
               <button
                 onClick={() => setSelectedEvent(null)}
-                className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold"
+                className="btn-ghost text-xs px-4 py-2"
               >
                 Close
               </button>
@@ -198,7 +208,7 @@ export default function BookingCalendar() {
               {selectedEvent.status === "confirmed" && (
                 <button
                   onClick={() => handleCheckIn(selectedEvent.id)}
-                  className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold shadow-md shadow-emerald-600/20"
+                  className="btn-lime text-xs px-5 py-2"
                 >
                   Quick Check-In
                 </button>
@@ -207,7 +217,7 @@ export default function BookingCalendar() {
               {selectedEvent.status === "checked_in" && (
                 <button
                   onClick={() => handleCheckOut(selectedEvent.id)}
-                  className="px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold shadow-md shadow-amber-600/20"
+                  className="btn-black text-xs px-5 py-2"
                 >
                   Quick Check-Out
                 </button>

@@ -10,7 +10,6 @@ import {
   Clock,
   Sparkles,
   Key,
-  CreditCard,
 } from "lucide-react";
 
 export default function CustomerDashboard({ onBrowseRooms }) {
@@ -47,7 +46,6 @@ export default function CustomerDashboard({ onBrowseRooms }) {
 
   const downloadInvoice = async (bookingId) => {
     try {
-      // Find invoice for this booking
       const invRes = await API.get("/invoices");
       const inv = (invRes.data.invoices || []).find((i) => i.booking?._id === bookingId || i.booking === bookingId);
       if (!inv) {
@@ -66,23 +64,23 @@ export default function CustomerDashboard({ onBrowseRooms }) {
 
   return (
     <div className="space-y-6">
-      {/* Welcome Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 border border-slate-700/80 p-6 sm:p-8 shadow-2xl">
-        <div className="relative z-10 max-w-2xl">
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-sky-400 mb-2">
-            <Sparkles className="w-4 h-4" />
-            <span>Guest Privilege Portal</span>
+      {/* Saturated Cobalt Signal Welcome Banner (#2665d6) */}
+      <div className="bg-cobalt-signal text-plaster-white rounded-card p-6 sm:p-10 shadow-sm relative overflow-hidden">
+        <div className="max-w-2xl relative z-10">
+          <div className="inline-flex items-center gap-2 bg-midnight-ink/20 px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider text-voltage-lime mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-voltage-lime" />
+            <span>Guest Privilege Suite</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold font-serif text-white tracking-tight">
-            Welcome, {user?.name || "Esteemed Guest"}
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            Welcome, <span className="text-voltage-lime">{user?.name || "Esteemed Guest"}</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
-            Manage your room reservations, track electronic room keys, access sequential GST tax invoices, and experience effortless hospitality.
+          <p className="text-xs sm:text-sm text-plaster-white/90 mt-3 leading-relaxed font-medium">
+            Manage your room reservations, track electronic key cards, and download sequential GST tax invoices effortlessly.
           </p>
-          <div className="mt-5 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-3">
             <button
               onClick={onBrowseRooms}
-              className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-lg shadow-sky-600/30 transition flex items-center gap-2"
+              className="btn-lime text-xs px-6 py-3 font-black"
             >
               <BedDouble className="w-4 h-4" />
               <span>Book Another Luxury Stay</span>
@@ -91,47 +89,49 @@ export default function CustomerDashboard({ onBrowseRooms }) {
         </div>
       </div>
 
-      {/* Active In-House Stay Card */}
+      {/* Active Stay Card - Plaster White (#ffffff) */}
       {activeStay && (
-        <div className="bg-gradient-to-br from-sky-950/40 via-slate-900 to-slate-900 p-6 rounded-2xl border border-sky-800/80 shadow-lg space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-sky-800/50 pb-3">
+        <div className="card-plaster border-2 border-cobalt-signal space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
             <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></span>
-              <h2 className="text-lg font-bold text-white font-serif">Your Active Stay Right Now</h2>
-              <span className="px-2 py-0.5 rounded-full bg-sky-950 text-sky-300 border border-sky-800 text-[10px] font-bold uppercase">
+              <span className="w-3 h-3 rounded-full bg-forest-depth animate-ping"></span>
+              <h2 className="text-xl font-extrabold text-midnight-ink tracking-tight">
+                Your Active In-House Stay
+              </h2>
+              <span className="px-3 py-0.5 rounded-full bg-midnight-ink text-voltage-lime text-[10px] font-black uppercase">
                 Checked In
               </span>
             </div>
-            <div className="flex items-center gap-2 text-xs text-slate-300">
-              <Key className="w-4 h-4 text-amber-400" />
+            <div className="flex items-center gap-2 text-xs text-midnight-ink font-bold">
+              <Key className="w-4 h-4 text-cobalt-signal" />
               <span>Key Issued: <strong>{activeStay.roomKeyNumber || "Front Desk Card"}</strong></span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
             <div>
-              <span className="text-slate-400">Room</span>
-              <p className="text-white font-bold text-base mt-0.5">#{activeStay.room?.roomNumber}</p>
-              <p className="text-slate-400">{activeStay.room?.title} ({activeStay.room?.category})</p>
+              <span className="text-slate-mute uppercase text-[10px] font-bold">Room Assigned</span>
+              <p className="text-midnight-ink font-black text-lg mt-0.5">#{activeStay.room?.roomNumber}</p>
+              <p className="text-slate-mute font-medium">{activeStay.room?.title} ({activeStay.room?.category})</p>
             </div>
             <div>
-              <span className="text-slate-400">Dates</span>
-              <p className="text-white font-semibold mt-0.5">
+              <span className="text-slate-mute uppercase text-[10px] font-bold">Stay Schedule</span>
+              <p className="text-midnight-ink font-bold mt-0.5">
                 {new Date(activeStay.checkInDate).toLocaleDateString()} &rarr; {new Date(activeStay.checkOutDate).toLocaleDateString()}
               </p>
-              <p className="text-slate-400">{activeStay.nights} Night(s)</p>
+              <p className="text-slate-mute font-medium">{activeStay.nights} Night(s)</p>
             </div>
             <div>
-              <span className="text-slate-400">Total Billed</span>
-              <p className="text-emerald-400 font-bold text-base mt-0.5">
+              <span className="text-slate-mute uppercase text-[10px] font-bold">Billing Total</span>
+              <p className="text-forest-depth font-black text-lg mt-0.5">
                 ${activeStay.pricing?.totalAmount || activeStay.paidAmount}
               </p>
-              <p className="text-slate-400">Status: {activeStay.paymentStatus.toUpperCase()}</p>
+              <p className="text-slate-mute font-bold uppercase text-[10px]">Status: {activeStay.paymentStatus}</p>
             </div>
             <div className="flex items-center sm:justify-end">
               <button
                 onClick={() => downloadInvoice(activeStay._id)}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-sky-400 border border-slate-700 font-semibold text-xs transition"
+                className="btn-lime text-xs px-4 py-2 font-black"
               >
                 <FileDown className="w-4 h-4" />
                 <span>Download Tax Invoice PDF</span>
@@ -142,17 +142,19 @@ export default function CustomerDashboard({ onBrowseRooms }) {
       )}
 
       {/* Upcoming Reservations */}
-      <div className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/80 space-y-4">
-        <div className="flex items-center justify-between border-b border-slate-700/60 pb-3">
-          <h3 className="font-semibold text-white text-base flex items-center gap-2">
-            <Calendar className="w-4 h-4 text-sky-400" />
+      <div className="card-plaster space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 className="font-extrabold text-midnight-ink text-base tracking-tight flex items-center gap-2">
+            <Calendar className="w-4 h-4 text-cobalt-signal" />
             Upcoming Reservations ({upcomingBookings.length})
           </h3>
-          <span className="text-xs text-slate-400">Confirmed Stays</span>
+          <span className="text-xs font-bold text-slate-mute bg-bone-canvas px-3 py-1 rounded-full">
+            Confirmed Stays
+          </span>
         </div>
 
         {upcomingBookings.length === 0 ? (
-          <div className="p-8 text-center text-slate-400 text-xs">
+          <div className="p-8 text-center text-slate-mute text-xs">
             No upcoming trips booked right now.
           </div>
         ) : (
@@ -160,21 +162,21 @@ export default function CustomerDashboard({ onBrowseRooms }) {
             {upcomingBookings.map((b) => (
               <div
                 key={b._id}
-                className="p-4 rounded-xl bg-slate-900/80 border border-slate-700/60 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs"
+                className="p-4 rounded-2xl bg-bone-canvas border border-slate-200/80 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs"
               >
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-white text-base">Room #{b.room?.roomNumber}</span>
-                    <span className="text-slate-400">({b.room?.category})</span>
-                    <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 text-[10px] font-semibold">
+                    <span className="font-black text-midnight-ink text-base">Room #{b.room?.roomNumber}</span>
+                    <span className="text-slate-mute font-semibold">({b.room?.category})</span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-forest-depth text-voltage-lime text-[10px] font-black">
                       Confirmed
                     </span>
                   </div>
-                  <p className="text-slate-300 mt-1">
+                  <p className="text-midnight-ink font-semibold mt-1">
                     Check-in: <strong>{new Date(b.checkInDate).toLocaleDateString()}</strong> &bull; Check-out:{" "}
                     <strong>{new Date(b.checkOutDate).toLocaleDateString()}</strong> ({b.nights} nights)
                   </p>
-                  <p className="text-slate-500 text-[11px] font-mono mt-0.5">
+                  <p className="text-slate-mute text-[11px] font-mono mt-0.5">
                     Ref: {b.bookingNumber} &bull; Total: ${b.pricing?.totalAmount}
                   </p>
                 </div>
@@ -182,15 +184,15 @@ export default function CustomerDashboard({ onBrowseRooms }) {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => downloadInvoice(b._id)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium border border-slate-700 transition"
+                    className="btn-black text-xs px-3.5 py-1.5"
                   >
-                    <Receipt className="w-3.5 h-3.5 text-sky-400" />
+                    <Receipt className="w-3.5 h-3.5" />
                     <span>Invoice PDF</span>
                   </button>
 
                   <button
                     onClick={() => handleCancel(b._id)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/60 text-red-400 font-medium border border-red-900/50 transition"
+                    className="btn-ghost text-xs text-bordeaux-maroon hover:text-bordeaux-maroon"
                   >
                     <XCircle className="w-3.5 h-3.5" />
                     <span>Cancel Stay</span>
@@ -202,11 +204,11 @@ export default function CustomerDashboard({ onBrowseRooms }) {
         )}
       </div>
 
-      {/* Past Trips / History */}
+      {/* Past Trips */}
       {pastBookings.length > 0 && (
-        <div className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/80 space-y-4">
-          <h3 className="font-semibold text-white text-base flex items-center gap-2 border-b border-slate-700/60 pb-3">
-            <Clock className="w-4 h-4 text-slate-400" />
+        <div className="card-plaster space-y-4">
+          <h3 className="font-extrabold text-midnight-ink text-base tracking-tight flex items-center gap-2 border-b border-slate-100 pb-3">
+            <Clock className="w-4 h-4 text-slate-mute" />
             Stay History & Past Invoices
           </h3>
 
@@ -214,22 +216,22 @@ export default function CustomerDashboard({ onBrowseRooms }) {
             {pastBookings.map((b) => (
               <div
                 key={b._id}
-                className="p-3 rounded-xl bg-slate-900/50 border border-slate-700/40 flex items-center justify-between text-xs opacity-80"
+                className="p-3.5 rounded-2xl bg-bone-canvas/70 border border-slate-200/60 flex items-center justify-between text-xs"
               >
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-semibold text-slate-200">Room #{b.room?.roomNumber}</span>
-                    <span className="text-slate-400">({b.room?.category})</span>
-                    <span className="text-slate-500 capitalize">({b.status})</span>
+                    <span className="font-bold text-midnight-ink">Room #{b.room?.roomNumber}</span>
+                    <span className="text-slate-mute">({b.room?.category})</span>
+                    <span className="text-slate-mute capitalize text-[11px]">({b.status})</span>
                   </div>
-                  <p className="text-slate-400 text-[11px] mt-0.5">
+                  <p className="text-slate-mute text-[11px] mt-0.5">
                     {new Date(b.checkInDate).toLocaleDateString()} - {new Date(b.checkOutDate).toLocaleDateString()} &bull; Total: ${b.pricing?.totalAmount}
                   </p>
                 </div>
 
                 <button
                   onClick={() => downloadInvoice(b._id)}
-                  className="px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-[11px] transition"
+                  className="btn-black text-xs px-3 py-1"
                 >
                   Download PDF
                 </button>

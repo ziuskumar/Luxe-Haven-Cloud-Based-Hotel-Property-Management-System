@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAuth, DEMO_CREDENTIALS } from "../context/AuthContext";
-import { LogIn, UserPlus, Sparkles, ShieldCheck } from "lucide-react";
+import { LogIn, UserPlus, Sparkles, ShieldCheck, X } from "lucide-react";
 
 export default function AuthModal({ isOpen, onClose }) {
   const { login, register, switchDemoRole } = useAuth();
@@ -51,24 +51,36 @@ export default function AuthModal({ isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-slate-700 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-6">
+    <div className="fixed inset-0 z-50 bg-midnight-ink/60 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="card-plaster max-w-md w-full p-6 sm:p-8 space-y-5 border border-cement-gray animate-in fade-in zoom-in-95">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-sky-400" />
-            <h2 className="text-xl font-bold font-serif text-white">Luxe Haven Security</h2>
+        <div className="flex items-center justify-between border-b border-cement-gray pb-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-full bg-voltage-lime flex items-center justify-center text-midnight-ink">
+              <ShieldCheck className="w-4 h-4" />
+            </div>
+            <div>
+              <h2 className="text-xl font-black text-midnight-ink font-display tracking-tight">
+                Luxe Haven Identity
+              </h2>
+              <span className="text-[10px] uppercase font-bold text-slate-mute tracking-wider">
+                RBAC Multi-Role Access
+              </span>
+            </div>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-white text-base">
-            ✕
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-bone-canvas hover:bg-cement-gray text-midnight-ink flex items-center justify-center transition"
+          >
+            <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* 1-Click Demo Accounts */}
-        <div className="bg-slate-800/50 p-3.5 rounded-2xl border border-slate-700 space-y-2">
-          <div className="flex items-center gap-1.5 text-xs font-semibold text-sky-400">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Instant 1-Click Demo Sign-In:</span>
+        {/* 1-Click Instant Demo Access */}
+        <div className="bg-bone-canvas p-4 rounded-[24px] border border-cement-gray space-y-2">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-midnight-ink">
+            <Sparkles className="w-3.5 h-3.5 text-cobalt-signal" />
+            <span>Instant 1-Click Role Switcher:</span>
           </div>
           <div className="grid grid-cols-2 gap-2 text-xs">
             {Object.entries(DEMO_CREDENTIALS).map(([key, item]) => (
@@ -76,29 +88,33 @@ export default function AuthModal({ isOpen, onClose }) {
                 key={key}
                 type="button"
                 onClick={() => handleDemoClick(key)}
-                className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-sky-500 text-slate-200 text-left font-medium transition"
+                className="p-2.5 rounded-input bg-plaster-white border border-cement-gray hover:border-midnight-ink text-midnight-ink text-left transition"
               >
-                <div className="font-bold text-white text-[11px]">{item.label}</div>
-                <div className="text-[10px] text-slate-400 truncate">{item.email}</div>
+                <div className="font-bold text-[11px] text-midnight-ink">{item.label}</div>
+                <div className="text-[10px] text-slate-mute truncate">{item.email}</div>
               </button>
             ))}
           </div>
         </div>
 
-        {/* Tabs */}
-        <div className="flex rounded-xl bg-slate-800 p-1 text-xs">
+        {/* Tab switch */}
+        <div className="flex rounded-full bg-bone-canvas p-1 text-xs border border-cement-gray">
           <button
             onClick={() => setTab("login")}
-            className={`flex-1 py-2 rounded-lg font-semibold transition ${
-              tab === "login" ? "bg-sky-600 text-white shadow" : "text-slate-400 hover:text-white"
+            className={`flex-1 py-2 rounded-full font-bold transition text-xs ${
+              tab === "login"
+                ? "bg-midnight-ink text-plaster-white"
+                : "text-slate-mute hover:text-midnight-ink"
             }`}
           >
             Sign In
           </button>
           <button
             onClick={() => setTab("register")}
-            className={`flex-1 py-2 rounded-lg font-semibold transition ${
-              tab === "register" ? "bg-sky-600 text-white shadow" : "text-slate-400 hover:text-white"
+            className={`flex-1 py-2 rounded-full font-bold transition text-xs ${
+              tab === "register"
+                ? "bg-midnight-ink text-plaster-white"
+                : "text-slate-mute hover:text-midnight-ink"
             }`}
           >
             Create Account
@@ -106,47 +122,53 @@ export default function AuthModal({ isOpen, onClose }) {
         </div>
 
         {error && (
-          <div className="p-3 rounded-xl bg-red-950/60 border border-red-800 text-red-300 text-xs">
+          <div className="p-3 rounded-input bg-bordeaux-maroon/10 border border-bordeaux-maroon/20 text-bordeaux-maroon text-xs font-bold">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+        <form onSubmit={handleSubmit} className="space-y-3.5 text-xs">
           {tab === "register" && (
             <>
               <div>
-                <label className="block text-slate-300 font-semibold mb-1">Full Name</label>
+                <label className="block text-midnight-ink font-bold mb-1 text-[11px] uppercase tracking-wider">
+                  Full Name
+                </label>
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Sophia Montgomery"
-                  className="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-sky-500"
+                  className="w-full bg-bone-canvas border border-cement-gray rounded-input p-3 text-midnight-ink focus:outline-none focus:border-midnight-ink font-medium"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-300 font-semibold mb-1">Username</label>
+                <label className="block text-midnight-ink font-bold mb-1 text-[11px] uppercase tracking-wider">
+                  Username
+                </label>
                 <input
                   type="text"
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="sophia_m"
-                  className="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-sky-500"
+                  className="w-full bg-bone-canvas border border-cement-gray rounded-input p-3 text-midnight-ink focus:outline-none focus:border-midnight-ink font-medium"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-300 font-semibold mb-1">Email Address</label>
+                <label className="block text-midnight-ink font-bold mb-1 text-[11px] uppercase tracking-wider">
+                  Email Address
+                </label>
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="sophia@example.com"
-                  className="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-sky-500"
+                  className="w-full bg-bone-canvas border border-cement-gray rounded-input p-3 text-midnight-ink focus:outline-none focus:border-midnight-ink font-medium"
                 />
               </div>
             </>
@@ -154,34 +176,38 @@ export default function AuthModal({ isOpen, onClose }) {
 
           {tab === "login" && (
             <div>
-              <label className="block text-slate-300 font-semibold mb-1">Username or Email</label>
+              <label className="block text-midnight-ink font-bold mb-1 text-[11px] uppercase tracking-wider">
+                Username or Email
+              </label>
               <input
                 type="text"
                 required
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
                 placeholder="admin@luxehaven.com"
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-sky-500"
+                className="w-full bg-bone-canvas border border-cement-gray rounded-input p-3 text-midnight-ink focus:outline-none focus:border-midnight-ink font-medium"
               />
             </div>
           )}
 
           <div>
-            <label className="block text-slate-300 font-semibold mb-1">Password</label>
+            <label className="block text-midnight-ink font-bold mb-1 text-[11px] uppercase tracking-wider">
+              Password
+            </label>
             <input
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••••••"
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-sky-500"
+              className="w-full bg-bone-canvas border border-cement-gray rounded-input p-3 text-midnight-ink focus:outline-none focus:border-midnight-ink font-medium"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs shadow-lg shadow-sky-600/30 transition flex items-center justify-center gap-2"
+            className="btn-lime w-full py-3.5 text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 mt-2"
           >
             {tab === "login" ? <LogIn className="w-4 h-4" /> : <UserPlus className="w-4 h-4" />}
             <span>{loading ? "Authenticating..." : tab === "login" ? "Sign In" : "Register"}</span>

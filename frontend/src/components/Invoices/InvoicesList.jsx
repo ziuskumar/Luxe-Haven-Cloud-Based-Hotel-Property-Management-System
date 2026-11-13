@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import API from "../../api";
 import { useAuth } from "../../context/AuthContext";
 import {
-  Receipt,
   FileDown,
   Search,
+  RefreshCw,
+  Receipt,
   CheckCircle2,
   Clock,
-  DollarSign,
-  CreditCard,
-  RefreshCw,
-  Printer,
+  Sparkles,
 } from "lucide-react";
 
 export default function InvoicesList() {
@@ -57,37 +55,40 @@ export default function InvoicesList() {
 
   return (
     <div className="space-y-6">
-      {/* Header & Controls */}
-      <div className="bg-slate-800/40 p-5 rounded-3xl border border-slate-700/60 space-y-4">
+      {/* Header & Controls Card */}
+      <div className="card-plaster p-6 sm:p-8 space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold font-serif text-white tracking-tight flex items-center gap-2">
-              Automated Billing & Sequential Tax Invoices
-              <span className="text-xs font-sans font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800 px-2.5 py-0.5 rounded-full">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-voltage-lime text-midnight-ink">
                 PDFKit Engine
               </span>
+              <span className="text-xs font-bold text-slate-mute">Sequential Tax Billing</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-black text-midnight-ink tracking-tight font-display">
+              Tax Invoices & Financial Records
             </h1>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Sequential numbering, GST compliance (CGST/SGST), and downloadable PDF receipts
+            <p className="text-xs text-slate-mute mt-1">
+              Compliant sequential numbering, 18% GST (CGST/SGST), and downloadable vector PDF receipts.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="relative w-full sm:w-64">
-              <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" />
+            <div className="relative w-full sm:w-72">
+              <Search className="w-3.5 h-3.5 absolute left-3.5 top-3 text-slate-mute" />
               <input
                 type="text"
                 placeholder="Search invoice # or guest name..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && fetchInvoices()}
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500"
+                className="w-full bg-bone-canvas border border-cement-gray rounded-input pl-9 pr-3.5 py-2 text-xs text-midnight-ink placeholder-slate-mute focus:outline-none focus:border-midnight-ink font-medium"
               />
             </div>
 
             <button
               onClick={fetchInvoices}
-              className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition"
+              className="p-2.5 rounded-full bg-bone-canvas hover:bg-cement-gray text-midnight-ink border border-cement-gray transition font-bold"
               title="Refresh Invoices"
             >
               <RefreshCw className="w-4 h-4" />
@@ -96,16 +97,16 @@ export default function InvoicesList() {
         </div>
 
         {/* Status Filters */}
-        <div className="flex items-center gap-2 text-xs pt-1 border-t border-slate-700/60">
-          <span className="text-slate-400">Payment Status:</span>
+        <div className="flex items-center gap-2 text-xs pt-3 border-t border-cement-gray">
+          <span className="text-slate-mute font-bold text-[11px] uppercase tracking-wider">Payment Status:</span>
           {["all", "paid", "pending"].map((st) => (
             <button
               key={st}
               onClick={() => setStatusFilter(st)}
-              className={`px-3 py-1 rounded-full capitalize transition font-medium ${
+              className={`px-4 py-1.5 rounded-full capitalize transition font-bold text-xs ${
                 statusFilter === st
-                  ? "bg-sky-600 text-white font-semibold shadow-sm"
-                  : "bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white"
+                  ? "bg-midnight-ink text-plaster-white"
+                  : "bg-bone-canvas text-slate-mute hover:bg-cement-gray hover:text-midnight-ink"
               }`}
             >
               {st}
@@ -114,74 +115,75 @@ export default function InvoicesList() {
         </div>
       </div>
 
-      {/* Invoices Table */}
-      <div className="bg-slate-800/50 rounded-3xl border border-slate-700/80 overflow-hidden shadow-xl">
+      {/* Invoices Table Card */}
+      <div className="card-plaster overflow-hidden">
         {loading ? (
-          <div className="flex items-center justify-center p-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-500"></div>
+          <div className="flex items-center justify-center p-16">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-midnight-ink"></div>
           </div>
         ) : invoices.length === 0 ? (
-          <div className="p-12 text-center text-slate-400 text-xs">
+          <div className="p-16 text-center text-slate-mute text-xs">
             No invoices found. Generate a booking to automatically issue a sequential GST tax invoice!
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-900/80 text-slate-400 font-semibold uppercase tracking-wider border-b border-slate-700/80">
+              <thead className="bg-bone-canvas text-slate-mute font-bold uppercase tracking-wider text-[11px] border-b border-cement-gray">
                 <tr>
-                  <th className="p-3.5">Invoice #</th>
-                  <th className="p-3.5">Date</th>
-                  <th className="p-3.5">Guest & Room</th>
-                  <th className="p-3.5">Subtotal</th>
-                  <th className="p-3.5">GST Tax (18%)</th>
-                  <th className="p-3.5">Grand Total</th>
-                  <th className="p-3.5">Payment</th>
-                  <th className="p-3.5 text-right">Actions</th>
+                  <th className="p-4">Invoice #</th>
+                  <th className="p-4">Issue Date</th>
+                  <th className="p-4">Guest & Room</th>
+                  <th className="p-4">Subtotal</th>
+                  <th className="p-4">GST (18%)</th>
+                  <th className="p-4">Grand Total</th>
+                  <th className="p-4">Payment</th>
+                  <th className="p-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-700/50">
+              <tbody className="divide-y divide-cement-gray/60 font-medium">
                 {invoices.map((inv) => {
                   const isPaid = inv.paymentStatus === "paid";
                   return (
-                    <tr key={inv._id} className="hover:bg-slate-900/40 transition">
-                      <td className="p-3.5 font-bold font-mono text-sky-400">
+                    <tr key={inv._id} className="hover:bg-bone-canvas/60 transition">
+                      <td className="p-4 font-mono font-bold text-midnight-ink">
                         {inv.invoiceNumber}
                       </td>
-                      <td className="p-3.5 text-slate-300">
+                      <td className="p-4 text-slate-mute font-medium">
                         {new Date(inv.issueDate).toLocaleDateString()}
                       </td>
-                      <td className="p-3.5">
-                        <div className="font-semibold text-white">{inv.guestName}</div>
-                        <div className="text-[11px] text-slate-400">
+                      <td className="p-4">
+                        <div className="font-bold text-midnight-ink">{inv.guestName}</div>
+                        <div className="text-[11px] text-slate-mute">
                           Room #{inv.room?.roomNumber || "N/A"} ({inv.room?.category || "Standard"})
                         </div>
                       </td>
-                      <td className="p-3.5 text-slate-300 font-mono">
+                      <td className="p-4 text-slate-mute font-mono">
                         ${inv.subtotal}
                       </td>
-                      <td className="p-3.5 text-slate-400 font-mono text-[11px]">
+                      <td className="p-4 text-slate-mute font-mono text-[11px]">
                         ${inv.totalTax} (9%+9%)
                       </td>
-                      <td className="p-3.5 font-bold font-mono text-white text-sm">
+                      <td className="p-4 font-black font-mono text-midnight-ink text-sm">
                         ${inv.grandTotal}
                       </td>
-                      <td className="p-3.5">
+                      <td className="p-4">
                         <span
-                          className={`px-2.5 py-1 rounded text-[11px] font-semibold uppercase ${
+                          className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider inline-flex items-center gap-1 ${
                             isPaid
-                              ? "bg-emerald-950 text-emerald-300 border border-emerald-800"
-                              : "bg-amber-950 text-amber-300 border border-amber-800"
+                              ? "bg-voltage-lime text-midnight-ink"
+                              : "bg-saffron text-midnight-ink"
                           }`}
                         >
+                          {isPaid ? <CheckCircle2 className="w-3 h-3" /> : <Clock className="w-3 h-3" />}
                           {inv.paymentStatus}
                         </span>
                       </td>
-                      <td className="p-3.5 text-right">
+                      <td className="p-4 text-right">
                         <div className="flex items-center justify-end gap-2">
                           <button
                             onClick={() => downloadPDF(inv._id, inv.invoiceNumber)}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sky-600/90 hover:bg-sky-600 text-white font-medium text-xs shadow transition"
-                            title="Download PDF"
+                            className="btn-lime text-xs px-3.5 py-1.5 flex items-center gap-1.5"
+                            title="Download Vector PDF Invoice"
                           >
                             <FileDown className="w-3.5 h-3.5" />
                             <span>PDF</span>
@@ -190,7 +192,7 @@ export default function InvoicesList() {
                           {isStaff && !isPaid && (
                             <button
                               onClick={() => recordPayment(inv._id)}
-                              className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-slate-700 font-medium text-xs transition"
+                              className="btn-black text-xs px-3 py-1.5"
                             >
                               Mark Paid
                             </button>

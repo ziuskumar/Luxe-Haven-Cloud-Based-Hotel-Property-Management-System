@@ -2,22 +2,17 @@ import React, { useState, useEffect } from "react";
 import API from "../../api";
 import { useAuth } from "../../context/AuthContext";
 import {
-  Calendar,
-  Clock,
   Sparkles,
   ShieldAlert,
   CreditCard,
   CheckCircle2,
-  DollarSign,
-  Gift,
-  Plus,
 } from "lucide-react";
 
 const ADDON_SERVICES = [
   { id: "limo", name: "Airport Limousine Transfer", cost: 50 },
-  { id: "breakfast", name: "Executive Gourmet Breakfast Buffet", cost: 35 },
-  { id: "champagne", name: "Chilled Champagne & Chocolates in Room", cost: 65 },
-  { id: "spa", name: "Full-Body Rejuvenation Spa Pass", cost: 110 },
+  { id: "breakfast", name: "Gourmet Breakfast Buffet", cost: 35 },
+  { id: "champagne", name: "Chilled Champagne in Room", cost: 65 },
+  { id: "spa", name: "Full-Body Wellness Spa Pass", cost: 110 },
 ];
 
 export default function BookingModal({ room, onClose, onSuccess }) {
@@ -45,13 +40,12 @@ export default function BookingModal({ room, onClose, onSuccess }) {
   const [availability, setAvailability] = useState({ checking: false, available: true, message: "" });
   const [submitting, setSubmitting] = useState(false);
 
-  // Recalculate price and availability whenever dates/addons/promo change
   useEffect(() => {
     if (!room || !checkInDate || !checkOutDate) return;
 
     let isMounted = true;
     const updatePreview = async () => {
-      // 1. Check availability
+      // 1. Availability check
       try {
         setAvailability((prev) => ({ ...prev, checking: true }));
         const availRes = await API.get(
@@ -76,7 +70,7 @@ export default function BookingModal({ room, onClose, onSuccess }) {
         }
       }
 
-      // 2. Calculate dynamic price
+      // 2. Price calculation
       try {
         const extraServices = selectedAddons.map((id) => {
           const s = ADDON_SERVICES.find((a) => a.id === id);
@@ -114,7 +108,7 @@ export default function BookingModal({ room, onClose, onSuccess }) {
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
     if (!availability.available) {
-      alert("Room is not available for chosen dates. Please pick another date range.");
+      alert("Room is unavailable for chosen dates.");
       return;
     }
 
@@ -151,63 +145,63 @@ export default function BookingModal({ room, onClose, onSuccess }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-      <div className="bg-slate-900 border border-slate-700 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 my-8">
-        {/* Modal Header */}
-        <div className="flex items-start justify-between border-b border-slate-800 pb-4">
+    <div className="fixed inset-0 z-50 bg-midnight-ink/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+      <div className="bg-plaster-white border border-midnight-ink rounded-card max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 my-8 text-midnight-ink">
+        {/* Header */}
+        <div className="flex items-start justify-between border-b border-slate-100 pb-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs uppercase font-mono tracking-wider px-2 py-0.5 rounded bg-sky-950 text-sky-400 border border-sky-800">
+              <span className="text-xs uppercase font-mono font-bold px-3 py-0.5 rounded-full bg-voltage-lime text-midnight-ink">
                 Room #{room.roomNumber}
               </span>
-              <span className="text-xs text-slate-400 font-semibold">{room.category}</span>
+              <span className="text-xs text-slate-mute font-bold">{room.category}</span>
             </div>
-            <h2 className="text-2xl font-bold font-serif text-white mt-1">{room.title}</h2>
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1">{room.title}</h2>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-white text-base p-1">
+          <button onClick={onClose} className="text-slate-mute hover:text-midnight-ink text-lg font-bold p-1">
             ✕
           </button>
         </div>
 
         <form onSubmit={handleBookingSubmit} className="space-y-5">
-          {/* Stay Dates & Availability */}
+          {/* Stay Dates */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Check-In Date</label>
+              <label className="block text-xs font-bold text-midnight-ink mb-1">Check-In Date</label>
               <input
                 type="date"
                 required
                 value={checkInDate}
                 onChange={(e) => setCheckInDate(e.target.value)}
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-sky-500"
+                className="w-full bg-bone-canvas border border-slate-300 rounded-lg p-2.5 text-xs text-midnight-ink font-semibold focus:outline-none focus:border-midnight-ink"
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Check-Out Date</label>
+              <label className="block text-xs font-bold text-midnight-ink mb-1">Check-Out Date</label>
               <input
                 type="date"
                 required
                 value={checkOutDate}
                 onChange={(e) => setCheckOutDate(e.target.value)}
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-sky-500"
+                className="w-full bg-bone-canvas border border-slate-300 rounded-lg p-2.5 text-xs text-midnight-ink font-semibold focus:outline-none focus:border-midnight-ink"
               />
             </div>
           </div>
 
           {/* Double-Booking Prevention Banner */}
           <div
-            className={`p-3 rounded-xl border text-xs flex items-center gap-2.5 transition ${
+            className={`p-3.5 rounded-2xl border text-xs flex items-center gap-2.5 font-bold transition ${
               availability.available
-                ? "bg-emerald-950/40 border-emerald-800/80 text-emerald-300"
-                : "bg-red-950/50 border-red-800 text-red-300"
+                ? "bg-voltage-lime/20 border-black/10 text-midnight-ink"
+                : "bg-bordeaux-maroon text-plaster-white border-bordeaux-maroon"
             }`}
           >
             {availability.available ? (
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+              <CheckCircle2 className="w-4 h-4 text-forest-depth flex-shrink-0" />
             ) : (
-              <ShieldAlert className="w-4 h-4 text-red-400 flex-shrink-0" />
+              <ShieldAlert className="w-4 h-4 text-voltage-lime flex-shrink-0" />
             )}
-            <span className="font-medium">
+            <span>
               {availability.checking ? "Verifying availability engine..." : availability.message}
             </span>
           </div>
@@ -215,40 +209,40 @@ export default function BookingModal({ room, onClose, onSuccess }) {
           {/* Guest Information */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs text-slate-400 mb-1">Guest Full Name</label>
+              <label className="block text-xs text-slate-mute font-bold mb-1">Full Name</label>
               <input
                 type="text"
                 required
                 value={guestName}
                 onChange={(e) => setGuestName(e.target.value)}
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl p-2 text-xs text-white focus:outline-none focus:border-sky-500"
+                className="w-full bg-bone-canvas border border-slate-300 rounded-lg p-2 text-xs font-semibold text-midnight-ink focus:outline-none focus:border-midnight-ink"
               />
             </div>
             <div>
-              <label className="block text-xs text-slate-400 mb-1">Email (for Confirmation)</label>
+              <label className="block text-xs text-slate-mute font-bold mb-1">Email</label>
               <input
                 type="email"
                 required
                 value={guestEmail}
                 onChange={(e) => setGuestEmail(e.target.value)}
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl p-2 text-xs text-white focus:outline-none focus:border-sky-500"
+                className="w-full bg-bone-canvas border border-slate-300 rounded-lg p-2 text-xs font-semibold text-midnight-ink focus:outline-none focus:border-midnight-ink"
               />
             </div>
             <div>
-              <label className="block text-xs text-slate-400 mb-1">Phone Number</label>
+              <label className="block text-xs text-slate-mute font-bold mb-1">Phone</label>
               <input
                 type="tel"
                 value={guestPhone}
                 onChange={(e) => setGuestPhone(e.target.value)}
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl p-2 text-xs text-white focus:outline-none focus:border-sky-500"
+                className="w-full bg-bone-canvas border border-slate-300 rounded-lg p-2 text-xs font-semibold text-midnight-ink focus:outline-none focus:border-midnight-ink"
               />
             </div>
           </div>
 
           {/* Extra Services & Add-ons */}
-          <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-700/60 space-y-2">
-            <span className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-sky-400" />
+          <div className="bg-bone-canvas p-4 rounded-2xl border border-slate-200/80 space-y-2">
+            <span className="text-xs font-extrabold text-midnight-ink flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-midnight-ink" />
               Enhance Your Luxury Stay (Add-on Services)
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
@@ -259,17 +253,17 @@ export default function BookingModal({ room, onClose, onSuccess }) {
                     key={addon.id}
                     type="button"
                     onClick={() => toggleAddon(addon.id)}
-                    className={`p-2.5 rounded-lg border text-left flex items-center justify-between transition ${
+                    className={`p-2.5 rounded-xl border text-left flex items-center justify-between transition ${
                       isSelected
-                        ? "bg-sky-950 border-sky-600 text-sky-200"
-                        : "bg-slate-900/60 border-slate-700 text-slate-300 hover:border-slate-600"
+                        ? "bg-plaster-white border-midnight-ink shadow-sm font-bold text-midnight-ink"
+                        : "bg-plaster-white/60 border-slate-200 text-slate-mute hover:bg-white"
                     }`}
                   >
                     <div>
-                      <span className="font-medium block">{addon.name}</span>
-                      <span className="text-[11px] text-slate-400">+${addon.cost}</span>
+                      <span className="block font-bold">{addon.name}</span>
+                      <span className="text-[11px] text-slate-mute">+${addon.cost}</span>
                     </div>
-                    {isSelected && <CheckCircle2 className="w-4 h-4 text-sky-400" />}
+                    {isSelected && <CheckCircle2 className="w-4 h-4 text-forest-depth" />}
                   </button>
                 );
               })}
@@ -279,26 +273,26 @@ export default function BookingModal({ room, onClose, onSuccess }) {
           {/* Promo Code & Payment Method */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs text-slate-400 mb-1">
-                Discount / Promo Code (Try LUXE10 or WELCOME20)
+              <label className="block text-xs text-slate-mute font-bold mb-1">
+                Promo Code (LUXE10 or WELCOME20)
               </label>
               <input
                 type="text"
                 value={promoCode}
                 onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
                 placeholder="LUXE10"
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-mono uppercase focus:outline-none focus:border-sky-500"
+                className="w-full bg-bone-canvas border border-slate-300 rounded-lg p-2.5 text-xs text-midnight-ink font-mono font-bold uppercase focus:outline-none focus:border-midnight-ink"
               />
             </div>
 
             <div>
-              <label className="block text-xs text-slate-400 mb-1">Payment Method</label>
+              <label className="block text-xs text-slate-mute font-bold mb-1">Payment Method</label>
               <select
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none cursor-pointer"
+                className="w-full bg-bone-canvas border border-slate-300 rounded-lg p-2.5 text-xs text-midnight-ink font-bold focus:outline-none cursor-pointer"
               >
-                <option value="card">Credit / Debit Card (Instant)</option>
+                <option value="card">Credit / Debit Card</option>
                 <option value="upi">UPI / Instant QR Payment</option>
                 <option value="online">Online Payment Gateway</option>
                 <option value="cash">Pay at Front Desk</option>
@@ -308,44 +302,44 @@ export default function BookingModal({ room, onClose, onSuccess }) {
 
           {/* Itemized Dynamic Pricing Summary Box */}
           {pricing && (
-            <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2 text-xs">
-              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
-                Automated Itemized Billing & GST Breakdown
+            <div className="bg-bone-canvas p-5 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <span className="text-[10px] uppercase font-black text-slate-mute tracking-wider">
+                Itemized GST Billing Summary (18% Tax Included)
               </span>
-              <div className="space-y-1.5 border-t border-slate-800/80 pt-2 text-slate-300">
+              <div className="space-y-1.5 border-t border-slate-200 pt-2 text-midnight-ink font-medium">
                 <div className="flex justify-between">
                   <span>Room Stay ({pricing.nights} night(s) &times; ${pricing.baseRatePerNight}):</span>
-                  <span className="font-mono text-white">${pricing.baseSubtotal}</span>
+                  <span className="font-mono font-bold">${pricing.baseSubtotal}</span>
                 </div>
                 {pricing.dynamicAdjustment > 0 && (
-                  <div className="flex justify-between text-amber-400">
-                    <span>Dynamic Surge Adjustment (Weekend/Demand):</span>
+                  <div className="flex justify-between text-cobalt-signal font-bold">
+                    <span>Dynamic Surge Adjustment (Weekend/Yield):</span>
                     <span className="font-mono">+${pricing.dynamicAdjustment}</span>
                   </div>
                 )}
                 {pricing.extraServicesTotal > 0 && (
-                  <div className="flex justify-between text-sky-400">
-                    <span>Extra Add-on Services:</span>
+                  <div className="flex justify-between text-midnight-ink font-bold">
+                    <span>Extra Add-on Amenities:</span>
                     <span className="font-mono">+${pricing.extraServicesTotal}</span>
                   </div>
                 )}
                 {pricing.discountAmount > 0 && (
-                  <div className="flex justify-between text-emerald-400">
+                  <div className="flex justify-between text-forest-depth font-bold">
                     <span>Discount Applied ({pricing.discountCode}):</span>
                     <span className="font-mono">-${pricing.discountAmount}</span>
                   </div>
                 )}
-                <div className="flex justify-between text-slate-400 text-[11px] pt-1 border-t border-slate-800">
+                <div className="flex justify-between text-slate-mute text-[11px] pt-1 border-t border-slate-200">
                   <span>Taxable Subtotal:</span>
-                  <span className="font-mono">${pricing.taxableAmount}</span>
+                  <span className="font-mono font-bold">${pricing.taxableAmount}</span>
                 </div>
-                <div className="flex justify-between text-slate-400 text-[11px]">
+                <div className="flex justify-between text-slate-mute text-[11px]">
                   <span>CGST (9%) + SGST (9%) - Total 18% GST:</span>
-                  <span className="font-mono">+${pricing.taxAmount}</span>
+                  <span className="font-mono font-bold">+${pricing.taxAmount}</span>
                 </div>
-                <div className="flex justify-between text-base font-bold text-emerald-400 pt-2 border-t border-slate-800">
-                  <span className="text-white">Estimated Grand Total:</span>
-                  <span className="font-mono">${pricing.totalAmount}</span>
+                <div className="flex justify-between text-lg font-black text-midnight-ink pt-2 border-t border-slate-300">
+                  <span>Grand Total:</span>
+                  <span className="font-mono font-black">${pricing.totalAmount}</span>
                 </div>
               </div>
             </div>
@@ -356,14 +350,14 @@ export default function BookingModal({ room, onClose, onSuccess }) {
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition"
+              className="btn-ghost text-xs"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting || !availability.available}
-              className="px-6 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 disabled:bg-slate-800 disabled:text-slate-500 text-white text-xs font-bold shadow-lg shadow-sky-600/30 transition flex items-center gap-2"
+              className="btn-lime text-xs px-6 py-3 font-black"
             >
               <CreditCard className="w-4 h-4" />
               <span>{submitting ? "Processing..." : "Confirm Reservation & Generate Invoice"}</span>
