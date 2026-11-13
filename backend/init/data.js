@@ -33,7 +33,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG90ZWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
       filename: "mountain-retreat",
-    },  
+    },
     price: 1000,
     location: "Aspen",
     country: "United States",
@@ -45,7 +45,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG90ZWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
       filename: "historic-villa-tuscany",
-    },  
+    },
     price: 2500,
     location: "Florence",
     country: "Italy",
@@ -57,19 +57,19 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGhvdGVsc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
       filename: "secluded-treehouse-getaway",
-    },  
+    },
     price: 800,
     location: "Portland",
     country: "United States",
-  },  
-{
+  },
+  {
     title: "Beachfront Paradise",
     description:
       "Step out of your door onto the sandy beach. This beachfront condo offers the ultimate relaxation.",
     image: {
       url: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhvdGVsc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
       filename: "beachfront-paradise",
-    },  
+    },
     price: 2000,
     location: "Cancun",
     country: "Mexico",
@@ -81,7 +81,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1vdW50YWlufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
       filename: "rustic-cabin-lake",
-    },  
+    },
     price: 900,
     location: "Lake Tahoe",
     country: "United States",
@@ -93,7 +93,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2t5JTIwdmFjYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
       filename: "luxury-penthouse-city-views",
-    },  
+    },
     price: 3500,
     location: "Los Angeles",
     country: "United States",
@@ -105,7 +105,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHNreSUyMHZhY2F0aW9ufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
       filename: "ski-in-ski-out-chalet",
-    },  
+    },
     price: 3000,
     location: "Verbier",
     country: "Switzerland",
@@ -117,7 +117,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fG1vdW50YWlufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
       filename: "safari-lodge-serengeti",
-    },  
+    },
     price: 4000,
     location: "Serengeti National Park",
     country: "Tanzania",
@@ -129,7 +129,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2FtcGluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
       filename: "historic-canal-house",
-    },  
+    },
     price: 1800,
     location: "Amsterdam",
     country: "Netherlands",
@@ -141,7 +141,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1618140052121-39fc6db33972?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bG9kZ2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
       filename: "private-island-retreat",
-    },  
+    },
     price: 10000,
     location: "Fiji",
     country: "Fiji",
@@ -153,7 +153,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1602088113235-229c19758e9f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YmVhY2glMjB2YWNhdGlvbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
       filename: "charming-cottage-cotswolds",
-    },  
+    },
     price: 1200,
     location: "Cotswolds",
     country: "United Kingdom",
@@ -165,7 +165,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1533619239233-6280475a633a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNreSUyMHZhY2F0aW9ufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
       filename: "historic-brownstone-boston",
-    },  
+    },
     price: 2200,
     location: "Boston",
     country: "United States",
@@ -177,7 +177,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1602391833977-358a52198938?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fGNhbXBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
       filename: "beachfront-bungalow-bali",
-    },  
+    },
     price: 1800,
     location: "Bali",
     country: "Indonesia",
@@ -189,7 +189,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1521401830884-6c03c1c87ebb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGxvZGdlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
       filename: "mountain-view-cabin-banff",
-    },  
+    },
     price: 1500,
     location: "Banff",
     country: "Canada",
@@ -201,7 +201,7 @@ const sampleListings = [
     image: {
       url: "https://plus.unsplash.com/premium_photo-1670963964797-942df1804579?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGxvZGdlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
       filename: "art-deco-apartment-miami",
-    },  
+    },
     price: 1600,
     location: "Miami",
     country: "United States",
@@ -213,7 +213,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1470165301023-58dab8118cc9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGxvZGdlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
       filename: "tropical-villa-phuket",
-    },  
+    },
     price: 3000,
     location: "Phuket",
     country: "Thailand",
@@ -225,7 +225,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1585543805890-6051f7829f98?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGJlYWNoJTIwdmFjYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
       filename: "historic-castle-scotland",
-    },  
+    },
     price: 4000,
     location: "Scottish Highlands",
     country: "United Kingdom",
@@ -237,7 +237,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZHViYWl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
       filename: "desert-oasis-dubai",
-    },  
+    },
     price: 5000,
     location: "Dubai",
     country: "United Arab Emirates",
@@ -249,7 +249,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1586375300773-8384e3e4916f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGxvZGdlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
       filename: "rustic-log-cabin-montana",
-    },  
+    },
     price: 1100,
     location: "Montana",
     country: "United States",
@@ -261,7 +261,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8dmlsbGF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
       filename: "beachfront-villa-greece",
-    },  
+    },
     price: 2500,
     location: "Mykonos",
     country: "Greece",
@@ -273,7 +273,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1488462237308-ecaa28b729d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c2t5JTIwdmFjYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
       filename: "eco-friendly-treehouse-retreat",
-    },  
+    },
     price: 750,
     location: "Costa Rica",
     country: "Costa Rica",
@@ -285,7 +285,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1587381420270-3e1a5b9e6904?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGxvZGdlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
       filename: "historic-cottage-charleston",
-    },  
+    },
     price: 1600,
     location: "Charleston",
     country: "United States",
@@ -297,7 +297,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1480796927426-f609979314bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHRva3lvfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
       filename: "modern-apartment-tokyo",
-    },  
+    },
     price: 2000,
     location: "Tokyo",
     country: "Japan",
@@ -309,7 +309,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1578645510447-e20b4311e3ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGNhbXBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
       filename: "lakefront-cabin-new-hampshire",
-    },  
+    },
     price: 1200,
     location: "New Hampshire",
     country: "United States",
@@ -321,7 +321,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFrZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
       filename: "luxury-villa-maldives",
-    },  
+    },
     price: 6000,
     location: "Maldives",
     country: "Maldives",
@@ -333,7 +333,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGxha2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
       filename: "ski-chalet-aspen",
-    },  
+    },
     price: 4000,
     location: "Aspen",
     country: "United States",
@@ -345,7 +345,7 @@ const sampleListings = [
     image: {
       url: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhY2glMjBob3VzZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
       filename: "secluded-beach-house-costa-rica",
-    },  
+    },
     price: 1800,
     location: "Costa Rica",
     country: "Costa Rica",
