@@ -13,6 +13,7 @@ import {
   LogIn,
   Sparkles,
   ClipboardList,
+  Compass,
 } from "lucide-react";
 
 export default function Navbar({ activeTab, setActiveTab, onOpenAuthModal }) {
@@ -173,6 +174,19 @@ export default function Navbar({ activeTab, setActiveTab, onOpenAuthModal }) {
                 <span>RBAC</span>
               </button>
             )}
+
+            <button
+              onClick={() => setActiveTab("landing")}
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition ${
+                activeTab === "landing"
+                  ? "bg-voltage-lime text-midnight-ink font-black shadow-sm"
+                  : "text-midnight-ink hover:bg-bone-canvas"
+              }`}
+              title="View Public Hero Landing Page"
+            >
+              <Compass className="w-3.5 h-3.5" />
+              <span>Public Site</span>
+            </button>
           </nav>
 
           {/* Right Action Buttons */}

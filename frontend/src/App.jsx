@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "./context/AuthContext";
 import { useSocket } from "./context/SocketContext";
 import Navbar from "./components/Navbar";
+import LandingPage from "./components/LandingPage/LandingPage";
 import AdminDashboard from "./components/Dashboards/AdminDashboard";
 import ManagerDashboard from "./components/Dashboards/ManagerDashboard";
 import ReceptionistDashboard from "./components/Dashboards/ReceptionistDashboard";
@@ -15,7 +16,7 @@ import AuthModal from "./components/AuthModal";
 import { Bell, Sparkles, X } from "lucide-react";
 
 export default function App() {
-  const { role, isStaff, isAdmin } = useAuth();
+  const { user, role, isStaff, isAdmin } = useAuth();
   const { toastAlert, setToastAlert } = useSocket();
   const [activeTab, setActiveTab] = useState("dashboard");
   const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -39,11 +40,14 @@ export default function App() {
     }
   };
 
+  // Display Landing Page to unauthenticated visitors, or when 'landing' tab is active
+  const showLanding = !user || activeTab === "landing";
+
   return (
     <div className="min-h-screen bg-bone-canvas text-midnight-ink flex flex-col selection:bg-voltage-lime selection:text-midnight-ink">
       {/* Real-Time Toast Notification Popup (Socket.IO) */}
       {toastAlert && (
-        <div className="fixed bottom-6 right-6 z-50 max-w-sm w-full card-plaster p-4 border border-cement-gray flex items-start justify-between gap-3 animate-in slide-in-from-bottom-5">
+        <div className="fixed bottom-6 right-6 z-50 max-w-sm w-full card-plaster p-4 border border-cement-gray flex items-start justify-between gap-3 animate-in slide-in-from-bottom-5 shadow-2xl">
           <div className="flex items-start gap-3">
             <div className="p-2.5 rounded-full bg-voltage-lime text-midnight-ink">
               <Bell className="w-4 h-4 animate-bounce" />
@@ -65,44 +69,69 @@ export default function App() {
         </div>
       )}
 
-      {/* Floating Main Navbar */}
-      <Navbar
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        onOpenAuthModal={() => setAuthModalOpen(true)}
-      />
-
-      {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {activeTab === "dashboard" && renderDashboard()}
-        {activeTab === "rooms" && (
-          <RoomsList
-            onBookingComplete={() => {
-              setActiveTab("reservations");
-            }}
+      {showLanding ? (
+        <LandingPage
+          user={user}
+          onOpenAuthModal={() => setAuthModalOpen(true)}
+          onGoToDashboard={() => setActiveTab("dashboard")}
+          onExploreRooms={() => {
+            if (user) {
+              setActiveTab("rooms");
+            } else {
+              const el = document.getElementById("rooms");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+          onBookNow={() => {
+            if (user) {
+              setActiveTab("rooms");
+            } else {
+              setAuthModalOpen(true);
+            }
+          }}
+        />
+      ) : (
+        <>
+          {/* Floating Main Navbar */}
+          <Navbar
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            onOpenAuthModal={() => setAuthModalOpen(true)}
           />
-        )}
-        {activeTab === "reservations" && <BookingsList />}
-        {activeTab === "calendar" && <BookingCalendar />}
-        {activeTab === "invoices" && <InvoicesList />}
-        {activeTab === "users" && isAdmin && <UsersList />}
-      </main>
 
-      {/* Clean Editorial Footer */}
-      <footer className="bg-plaster-white border-t border-cement-gray py-6 text-xs text-slate-mute">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="font-bold text-midnight-ink">
-            &copy; {new Date().getFullYear()} Luxe Haven &mdash; Cloud-Based Hotel Property Management System (PMS).
-          </p>
-          <div className="flex items-center gap-4 text-xs font-semibold text-slate-mute">
-            <span>GST HSN: 9963</span>
-            <span>&bull;</span>
-            <span>REST API + Socket.IO</span>
-            <span>&bull;</span>
-            <span className="text-midnight-ink font-bold">JWT RBAC Enabled</span>
-          </div>
-        </div>
-      </footer>
+          {/* Main Content Area */}
+          <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {activeTab === "dashboard" && renderDashboard()}
+            {activeTab === "rooms" && (
+              <RoomsList
+                onBookingComplete={() => {
+                  setActiveTab("reservations");
+                }}
+              />
+            )}
+            {activeTab === "reservations" && <BookingsList />}
+            {activeTab === "calendar" && <BookingCalendar />}
+            {activeTab === "invoices" && <InvoicesList />}
+            {activeTab === "users" && isAdmin && <UsersList />}
+          </main>
+
+          {/* Clean Editorial Footer */}
+          <footer className="bg-plaster-white border-t border-cement-gray py-6 text-xs text-slate-mute">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <p className="font-bold text-midnight-ink">
+                &copy; {new Date().getFullYear()} Luxe Haven &mdash; Cloud-Based Hotel Property Management System (PMS).
+              </p>
+              <div className="flex items-center gap-4 text-xs font-semibold text-slate-mute">
+                <span>GST HSN: 9963</span>
+                <span>&bull;</span>
+                <span>REST API + Socket.IO</span>
+                <span>&bull;</span>
+                <span className="text-midnight-ink font-bold">JWT RBAC Enabled</span>
+              </div>
+            </div>
+          </footer>
+        </>
+      )}
 
       {/* Auth Modal */}
       <AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
