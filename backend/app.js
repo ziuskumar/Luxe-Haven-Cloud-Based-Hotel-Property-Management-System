@@ -149,7 +149,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-if (process.env.NODE_ENV !== "test") {
+if (process.env.NODE_ENV !== "test" && !process.env.VERCEL) {
   main()
     .then(() => {
       console.log("Connected to MongoDB Atlas");
@@ -164,6 +164,10 @@ if (process.env.NODE_ENV !== "test") {
         console.log(`Luxe Haven PMS Server started on port ${port} (DB connecting in background)`);
       });
     });
+} else if (process.env.VERCEL) {
+  main().catch((err) => console.error("Vercel MongoDB Atlas connection:", err.message));
 }
 
-module.exports = { app, server };
+module.exports = app;
+module.exports.app = app;
+module.exports.server = server;
