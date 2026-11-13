@@ -5,6 +5,7 @@
 ### *Enterprise-Grade Hotel PMS, Hospitality Intelligence Platform & Cloud DevOps Architecture*
 
 [![AWS](https://img.shields.io/badge/AWS-Cloud%20Architecture-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
+[![Vercel](https://img.shields.io/badge/Vercel-Production%20Deployment-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
 [![Jenkins](https://img.shields.io/badge/Jenkins-CI%2FCD%20Pipeline-D24939?style=for-the-badge&logo=jenkins&logoColor=white)](https://www.jenkins.io/)
 [![Docker Hub](https://img.shields.io/badge/Docker_Hub-Container%20Registry-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/)
 [![AWS ALB](https://img.shields.io/badge/AWS%20ALB-Load%20Balanced-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)](http://ae15b29242bea445798199488eaa98b7-1484264032.us-east-1.elb.amazonaws.com)
@@ -20,11 +21,11 @@
 
 <br/>
 
-<img src="https://images.openai.com/static-rsc-4/Bk9AGnWKTiMXjKSHpT7_IRD2IbtgGPDPUWz_TFT3LE20T4AIt_PXRkluk8tUqfSYfENakKEQ-kVby0skWsYV0U3XXts05FO97bIZw0_E_RBkD7H-6XjookbieMzQ9XMBfhbjmHPj__30aKjysmNQgjtZlyN12k_Pfg0KbgA4uuU?purpose=inline" alt="Luxe Haven Cloud Hotel Property Management System" width="940" style="border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);" />
+<img src="docs/images/01-hero-landing.jpg" alt="Luxe Haven Public Hero Landing Page" width="100%" style="border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);" />
 
 <br/>
 
-**[🌐 AWS Live Demo](http://ae15b29242bea445798199488eaa98b7-1484264032.us-east-1.elb.amazonaws.com)** • **[☁️ Cloud & DevOps](#️-enterprise-cloud-architecture--devops-cicd-pipeline)** • **[RBAC Accounts](#-role-based-access-control-rbac--demo-accounts)** • **[Quick Setup](#-quick-start--setup)** • **[API Docs](#-api-endpoints-summary)**
+**[🌐 AWS Live ALB Link](http://ae15b29242bea445798199488eaa98b7-1484264032.us-east-1.elb.amazonaws.com)** • **[🚀 Vercel Deployment](#-vercel-cloud-deployment)** • **[☁️ Cloud & DevOps](#️-enterprise-cloud-architecture--devops-cicd-pipeline)** • **[📸 System Gallery](#-system-gallery--live-ui-showcase)** • **[🔑 RBAC Accounts](#-role-based-access-control-rbac--demo-accounts)** • **[⚡ Quick Setup](#-quick-start--setup)**
 
 ---
 
@@ -33,353 +34,288 @@
 > 🌐 **AWS Production / Staging Deployment (Elastic Load Balancer)**:  
 > **Direct Endpoint**: [http://ae15b29242bea445798199488eaa98b7-1484264032.us-east-1.elb.amazonaws.com](http://ae15b29242bea445798199488eaa98b7-1484264032.us-east-1.elb.amazonaws.com)  
 > 
-> ℹ️ *Cloud Infrastructure & Staging Evaluation Notice: This project is deployed on live AWS cloud infrastructure (AWS EC2, Application Load Balancer, and S3). To adhere to enterprise FinOps and cloud cost-optimization best practices, this staging environment is maintained for active recruiter and reviewer evaluation, and will be automatically scaled down/decommissioned after the demonstration period.*
+> ℹ️ *Cloud Infrastructure & FinOps Notice: This system is live on an enterprise AWS architecture (AWS EC2 compute, Application Load Balancer, and S3 media storage). Following modern cloud FinOps cost-governance principles, this active multi-service deployment is provisioned for recruiter and reviewer evaluation and will expire/scale down after the scheduled demo period.*
 
 ---
 
 ## 📖 Executive Summary
 
-**Luxe Haven** is an enterprise-grade, cloud-native **Hotel Property Management System (PMS)** engineered for boutique hotels, luxury resorts, and multi-property hospitality groups. 
+**Luxe Haven** is an enterprise-grade, cloud-native **Hotel Property Management System (PMS)** and guest hospitality platform engineered for luxury resorts, boutique hotel collections, and multi-property management groups.
 
-Beyond core full-stack software engineering, this repository demonstrates end-to-end **Cloud Engineering & DevOps lifecycle mastery**: containerization with **Docker multi-stage builds**, automated **Jenkins CI/CD deployment pipelines**, image distribution via **Docker Hub**, and production hosting across **AWS EC2**, **AWS Application Load Balancer (ALB)**, and **AWS S3** with high-availability health checks and automated quality gates.
+Beyond core full-stack software development, this repository demonstrates end-to-end **Cloud Architecture & DevOps Lifecycle Mastery**:
+- **Multi-Stage Containerization** with Docker & Alpine runtimes.
+- **Automated CI/CD Delivery** using Jenkins with automated quality gates and unit test suites.
+- **Container Distribution** through Docker Hub registry (`ziuskumar/luxehaven-pms`).
+- **High-Availability Cloud Hosting** across **AWS EC2**, **Application Load Balancer (ALB)**, and **AWS S3**.
+- **Edge Deployment on Vercel** using serverless Node.js runtime and optimized Vite React SPA routing.
+- **Real-Time Operations** with Socket.IO WebSocket telemetry, automated 18% GST tax invoicing with PDFKit vector generation, FullCalendar dynamic occupancy grids, and Recharts yield intelligence.
+
+---
+
+## 📸 System Gallery & Live UI Showcase
+
+### 1. Public Hero & Luxury Advertising Landing Page
+*Full-viewport (100vh) luxury resort hero featuring cliffside architecture, infinity pool visuals, dual-state sticky glassmorphic navigation, and seamless booking workflow.*
+
+<div align="center">
+  <img src="docs/images/01-hero-landing.jpg" alt="Luxe Haven Luxury Hero Landing Page" width="100%" style="border-radius: 12px; margin-bottom: 24px; box-shadow: 0 12px 28px rgba(0,0,0,0.15);" />
+</div>
+
+---
+
+### 2. "Discover Your Stay" Accommodations Showcase
+*Curated luxury suites and villas featuring dynamic pricing badges, capacity indicators, custom amenities (Starlink Wi-Fi, Travertine baths, Private plunge pools), and 1-click reservations.*
+
+<div align="center">
+  <img src="docs/images/02-accommodations-showcase.jpg" alt="Discover Your Stay Accommodations Showcase" width="100%" style="border-radius: 12px; margin-bottom: 24px; box-shadow: 0 12px 28px rgba(0,0,0,0.15);" />
+</div>
+
+---
+
+### 3. Executive Analytics & Yield Performance Dashboard
+*Executive analytics engine powered by Recharts: real-time Gross Revenue, Occupancy Rate %, RevPAR (Revenue Per Available Room), active bookings, and monthly yield trends.*
+
+<div align="center">
+  <img src="docs/images/03-admin-analytics-dashboard.jpg" alt="Executive Analytics & Hotel Intelligence Dashboard" width="100%" style="border-radius: 12px; margin-bottom: 24px; box-shadow: 0 12px 28px rgba(0,0,0,0.15);" />
+</div>
+
+---
+
+### 4. Interactive Reservation Calendar (FullCalendar v6)
+*Dynamic occupancy grid with month, week, and day views. Color-coded reservation tracking (Confirmed, Checked-In, Checked-Out, Pending), arrival/departure turnover, and real-time feed synchronization.*
+
+<div align="center">
+  <img src="docs/images/04-interactive-calendar.png" alt="Interactive Reservation Calendar" width="100%" style="border-radius: 12px; margin-bottom: 24px; box-shadow: 0 12px 28px rgba(0,0,0,0.15);" />
+</div>
+
+---
+
+### 5. Luxury Rooms & Real-Time Availability Engine
+*Live room rack with date-range filters, max rate sliders, category chips, housekeeping lifecycle badges (`CLEAN`, `INSPECTED`, `OCCUPIED`), and concurrency-safe double-booking prevention.*
+
+<div align="center">
+  <img src="docs/images/05-rooms-availability.jpg" alt="Luxury Rooms & Real-Time Availability Engine" width="100%" style="border-radius: 12px; margin-bottom: 24px; box-shadow: 0 12px 28px rgba(0,0,0,0.15);" />
+</div>
+
+---
+
+### 6. Tax Invoices & Sequential GST Financial Billing
+*Sequential automated invoice numbering (`INV-2026-0001`), itemized 18% GST tax calculation (9% CGST + 9% SGST), payment settlement controls, and downloadable vector PDF receipts generated on-the-fly via PDFKit.*
+
+<div align="center">
+  <img src="docs/images/06-invoices-billing.png" alt="Tax Invoices & Financial Records" width="100%" style="border-radius: 12px; margin-bottom: 24px; box-shadow: 0 12px 28px rgba(0,0,0,0.15);" />
+</div>
 
 ---
 
 ## ☁️ Enterprise Cloud Architecture & DevOps CI/CD Pipeline
 
-The entire system is deployed via an automated, enterprise CI/CD workflow designed for zero-downtime rolling updates and high availability:
+The application lifecycle is orchestrated through an automated CI/CD pipeline built for high availability and zero-downtime rolling updates:
 
 ```mermaid
 flowchart TD
-    Dev["Developer Git Push\n(main branch)"] -->|Webhook Trigger| Jenkins["Jenkins CI/CD Server\n(Automated Pipeline)"]
+    Dev["Developer Push\n(GitHub main branch)"] -->|Webhook Trigger| Jenkins["Jenkins CI/CD Server\n(Pipeline Engine)"]
+    Dev -->|GitHub Integration| Vercel["Vercel Edge Cloud\n(Frontend SPA & Serverless API)"]
     
-    subgraph CI["Continuous Integration (Jenkins Stages)"]
-        S1["Stage 1: Code Checkout & Dependency Audit"]
-        S2["Stage 2: Automated Testing (Jest + Supertest)"]
-        S3["Stage 3: Multi-Stage Docker Container Build"]
+    subgraph CI["Continuous Integration (Jenkins Pipeline)"]
+        S1["Stage 1: Git Checkout & Audit"]
+        S2["Stage 2: Jest Automated Testing (Unit & Engine)"]
+        S3["Stage 3: Multi-Stage Docker Build (Vite + Node Alpine)"]
         S4["Stage 4: Image Tagging (SHA & latest)"]
-        S5["Stage 5: Push to Docker Hub Registry"]
+        S5["Stage 5: Push to Docker Hub"]
     end
     
     Jenkins --> S1 --> S2 --> S3 --> S4 --> S5
     
     subgraph Hub["Container Registry"]
-        DHub["Docker Hub\n(Repository: ziuskumar/luxehaven-pms)"]
+        DHub["Docker Hub\n(ziuskumar/luxehaven-pms)"]
     end
     
     S5 -->|Secure Push| DHub
     
-    subgraph AWS["AWS Cloud Production Infrastructure"]
+    subgraph AWS["AWS Cloud Infrastructure (Production)"]
         ALB["AWS Application Load Balancer (ALB)\n(ae15b29242bea445798199488eaa98b7...)"]
         EC2["AWS EC2 Compute Instance\n(Docker Runtime Container Engine)"]
-        S3["AWS S3 Bucket\n(Static Assets & Room Media Storage)"]
-        CW["AWS CloudWatch\n(Logs, Uptime & Latency Telemetry)"]
-        Mongo["MongoDB Atlas Managed Cluster\n(Persistent Multi-AZ Database)"]
+        S3["AWS S3 Bucket\n(Room Assets & Document Storage)"]
+        CW["AWS CloudWatch\n(Logs & Health Metrics)"]
+        Mongo["MongoDB Atlas Cluster\n(Multi-AZ Persistent DB)"]
     end
     
-    Jenkins -->|Automated SSH / CD Deploy| EC2
-    EC2 -->|Pull Latest Image| DHub
-    EC2 -->|Connect Data| Mongo
-    EC2 -->|Asset Storage| S3
-    EC2 -->|Metrics & Logs| CW
-    ALB -->|Health Checks & Traffic Distribution| EC2
-    Users["Global Users & Front Desk Clients"] -->|HTTP / HTTPS Traffic| ALB
+    Jenkins -->|Automated SSH Rolling Deploy| EC2
+    EC2 -->|Pull Latest Container| DHub
+    EC2 -->|TLS Connection| Mongo
+    EC2 -->|Media Sync| S3
+    EC2 -->|Telemetry| CW
+    ALB -->|Health Checks & Balancing| EC2
+    
+    Users["End Users & Front Desk Clients"] -->|HTTP / HTTPS| ALB
+    Users -->|Fast Edge Access| Vercel
 ```
 
 ### 🛠️ DevOps & Cloud Highlights
 
 1. **Multi-Stage Docker Containerization**:
-   - Compiles the React 18 SPA with Vite in a dedicated builder stage.
-   - Packages only the production runtime and minimal Node.js Alpine base, reducing image size by over 60% and eliminating attack surfaces.
-   - Built-in container health checks and non-root execution principles.
+   - Isolated Vite production build compiles React 18, Tailwind CSS tokens, and Lucide icons.
+   - Minimal Alpine Node.js runtime reduces container footprint by >60% and eliminates extraneous build dependencies.
+   - Built-in container health checks (`/api/rooms`) and non-root execution principles.
 
 2. **Automated Jenkins CI/CD Pipeline**:
    - Automated webhook triggers execute upon every Git push.
-   - **Quality Gates**: Runs automated Jest unit and engine tests prior to containerization; builds fail fast if tests do not pass.
-   - Secure credential binding for Docker Hub and AWS access keys.
+   - **Quality Gates**: Runs automated Jest unit and engine test suites prior to container packaging; builds fail fast if tests do not pass.
    - Automated rolling deployment with container restart policies (`unless-stopped`).
 
 3. **High-Availability AWS Infrastructure**:
-   - **AWS Application Load Balancer (ALB)**: Distributes incoming web and WebSocket traffic, manages path-based routing, and performs continuous health checks (`/api/rooms`) to ensure uptime.
-   - **AWS EC2 (Elastic Compute Cloud)**: Hosts the production container engine running Node.js 22, Express, and Socket.IO.
-   - **AWS S3 (Simple Storage Service)**: Manages cloud storage for high-resolution property imagery and archival documents.
-   - **FinOps Governance**: Implementation of lifecycle schedules and cost-optimization thresholds to prevent idle cloud expense.
+   - **AWS Application Load Balancer (ALB)**: Manages incoming HTTP and WebSocket traffic with continuous health checks.
+   - **AWS EC2 Compute**: Hosts the active production container engine running Node.js 22, Express, and Socket.IO.
+   - **AWS S3**: Cloud object storage for high-resolution resort photography and invoices.
 
 ---
 
-## 🌟 The Final 5 Major Upgrades
+## 🚀 Vercel Cloud Deployment
 
+The repository includes a production-grade `vercel.json` configured for hybrid edge deployment:
+
+```json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/app.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/app.js"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "frontend/dist/assets/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "frontend/dist/index.html"
+    }
+  ]
+}
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                       LUXE HAVEN HOTEL PMS SUITE                            │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  01. Smart Room & Reservation Engine (Availability, Double-Booking, Keys)   │
-│  02. Multi-Tier RBAC & Auth Security (Admin, Manager, Reception, Customer)  │
-│  03. Automated Billing & Sequential GST Invoices (PDFKit Vector Engine)     │
-│  04. Interactive FullCalendar & Socket.IO Notification Center               │
-│  05. Visual Executive Analytics Dashboard (Recharts Live Intelligence)      │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
 
----
-
-### 01 · Critical: Smart Room & Reservation Management Engine
-
-<div align="center">
-  <img src="https://images.openai.com/static-rsc-4/Bk9AGnWKTiMXjKSHpT7_IRD2IbtgGPDPUWz_TFT3LE20T4AIt_PXRkluk8tUqfSYfENakKEQ-kVby0skWsYV0U3XXts05FO97bIZw0_E_RBkD7H-6XjookbieMzQ9XMBfhbjmHPj__30aKjysmNQgjtZlyN12k_Pfg0KbgA4uuU?purpose=inline" alt="Smart Room & Reservation Management" width="860" style="border-radius: 12px; margin-bottom: 12px;" />
-</div>
-
-- **Real-Time Room Availability**: Dynamic availability queries calculate vacancy based on check-in and check-out dates across room categories (*Standard, Deluxe, Executive Suite, Presidential Suite, Ocean Villa*).
-- **Double-Booking Prevention Engine**: Concurrency-safe date overlap validation (`checkInDate < reqCheckOutDate && checkOutDate > reqCheckInDate`) guarantees that no room can be double-booked across `confirmed`, `checked_in`, or `pending` states.
-- **Front-Desk Key & Check-In Workflow**: Front-desk agents issue physical keys or smart card tags (`KEY-201-A`) upon arrival, track check-in timestamps, and automatically transition room status to `occupied`.
-- **Intelligent Housekeeping Lifecycle**: Automatic housekeeping status transitions:
-  $$\text{Clean} \xrightarrow{\text{Check-In}} \text{Occupied} \xrightarrow{\text{Check-Out}} \text{Dirty (Service Required)} \xrightarrow{\text{Cleaned}} \text{Inspected} \rightarrow \text{Clean}$$
-- **Yield Management & Dynamic Pricing**: Real-time rate adjustments based on:
-  - Weekend surcharges (+15% Friday & Saturday night stays).
-  - Seasonal multipliers for peak holiday travel.
-  - Occupancy surge multipliers (triggers +20% surge when hotel occupancy &ge; 80%).
-  - Promo code discounts (`LUXE10`, `WELCOME20`, `VIP50`).
-
----
-
-### 02 · Role-Based Access Control (RBAC) & Security
-
-Luxe Haven enforces granular role-based permissions across both the React frontend and protected REST APIs via JWT tokens and bcrypt encryption:
-
-| Role | Interface / Dashboard | Permissions & Capabilities |
-|:---:|:---|:---|
-| <span style="color:#c084fc; font-weight:bold;">Admin</span> | **Executive Dashboard** | Full system control, user & staff management, dynamic role assignment, financial audit logs, system configuration. |
-| <span style="color:#38bdf8; font-weight:bold;">Hotel Manager</span> | **Manager Operations** | Room inventory control, dynamic pricing & surcharge multipliers, occupancy oversight, reservations supervision. |
-| <span style="color:#34d399; font-weight:bold;">Receptionist</span> | **Front Desk Operations** | Daily arrivals & departures schedule, interactive room rack grid, key card issuance, 1-click housekeeping status updates. |
-| <span style="color:#fbbf24; font-weight:bold;">Customer</span> | **Guest Privilege Portal** | Room browsing & date search, instant self-service booking, stay history, active room key viewer, downloadable tax invoices. |
-
-> 💡 **1-Click Demo Role Switcher**: A dedicated switcher bar at the top of the app allows instant 1-click switching between **Admin**, **Hotel Manager**, **Receptionist**, and **Customer** to test every dashboard without logging out!
-
----
-
-### 03 · Automated Billing & Sequential Invoice Management
-
-<div align="center">
-  <img src="https://images.openai.com/static-rsc-4/etP0nqDmjiPsdDascUAW44x5luyuKG_3PATaNIj2bZN4Rn_-QN5YsJqabpkfaOzs21oYBVQlet0BEuxF6LtS97g5rlZmx_2-zH-3hCo7j4tYmURhUQmmv2P80gSUzSIt6I9UiBfj1ZtIH8LdRfm9wWcdspeeE6mmUiJpYB04EuM?purpose=inline" alt="Automated Billing & Invoice Management" width="860" style="border-radius: 12px; margin-bottom: 12px;" />
-</div>
-
-- **Automatic Cost Calculation**: Itemized billing accounts for room nights, dynamic adjustments, promo discounts, and luxury add-ons (*Airport Limousine, Gourmet Breakfast, Champagne & Caviar, Spa Passes*).
-- **Sequential Invoice Numbering**: Automated, consecutive invoice numbering adhering to global financial compliance (`INV-2026-0001`, `INV-2026-0002`).
-- **GST / Tax Compliance Breakdown**: Automated 18% GST calculation split into **9% CGST** and **9% SGST** with taxable subtotal calculation.
-- **Downloadable Vector PDF Invoices (PDFKit)**: Streams professional, printable PDF invoices directly to the browser with:
-  - Official Luxe Haven Hotel PMS branding and contact header.
-  - Sequential Invoice Number, Issue Date, and Due Date.
-  - Guest contact information and reservation summary.
-  - Bordered itemized line-items table.
-  - Tax breakdown (CGST, SGST, Total Tax).
-  - High-visibility status stamp (**PAID IN FULL** in emerald green / **PAYMENT PENDING** in amber).
-  - Terms & conditions and electronic signature notice.
-
----
-
-### 04 · Interactive Booking Calendar & Real-Time Notification System
-
-<div align="center">
-  <img src="https://images.openai.com/static-rsc-4/ym01sjZiBnmv7mZ8jccJj-t3Mctq8jQuW8AW15Ff23LW3nWlr4qC5lPSFIQcjEyFTU3oTEtj9qyZaP3vsih9KRLkmdGwRmSmiDFSEknlNmt96oMl3wYO4AXKcHAZRLiy4bHhulqYFC3mhmr6buR5gIntg9BtrluBlQrNYcP2UYI?purpose=inline" alt="Interactive Booking Calendar & Notification System" width="860" style="border-radius: 12px; margin-bottom: 12px;" />
-</div>
-
-- **Interactive FullCalendar Suite**: Powered by `@fullcalendar/react` with smooth view toggles:
-  - **Month Grid View** (`dayGridMonth`)
-  - **Weekly Schedule** (`timeGridWeek`)
-  - **Daily Schedule** (`timeGridDay`)
-- **Color-Coded Reservation States**:
-  - 🟢 **Confirmed**: `#10b981` (Emerald Green)
-  - 🔵 **Checked-In**: `#0284c7` (Sky Blue)
-  - ⚪ **Checked-Out**: `#64748b` (Slate Gray)
-  - 🟡 **Pending**: `#f59e0b` (Amber)
-  - 🔴 **Cancelled**: `#ef4444` (Rose Red)
-- **Interactive Event Details Modal**: Click any reservation bar to inspect guest details, stay dates, billed totals, and trigger quick front-desk actions (Check-In / Check-Out).
-- **Socket.IO Real-Time Alerts**: WebSocket event broadcasting triggers live animated toast alerts in the bottom-right corner whenever a booking is created, checked in, or paid.
-- **Automated Email Delivery (Nodemailer)**: Sends beautifully formatted HTML receipts and booking confirmation notices directly to guests.
-
----
-
-### 05 · Visual Differentiator: Interactive Admin Dashboard & Analytics
-
-<div align="center">
-  <img src="https://images.openai.com/static-rsc-4/TNj-7KSI9t7TMOA18a34spy1MY9Z19WGX3MKPTHM68NgIOnL4-DjQ5NBjVrGQft6IUhvkZ9P4rEwhzDneJIEGR7lzSLBP5TOhXXw0DPZ0DFQT0mfaPXZzFQ5mS6s6ky5xl5HrLxUXCUslEmClR3zmFXEaU19dBHx5mPmztvq6z0?purpose=inline" alt="Interactive Executive Analytics Dashboard" width="860" style="border-radius: 12px; margin-bottom: 12px;" />
-</div>
-
-- **Executive KPI Cards**:
-  - **Gross Revenue**: Total collected from settled invoices.
-  - **Occupancy Rate %**: Real-time ratio of occupied rooms vs total inventory.
-  - **Total Bookings**: Reservation volume in selected time window.
-  - **Available Rooms**: Vacant inventory ready for booking.
-  - **RevPAR (Revenue Per Available Room)**: Vital hotel performance metric.
-  - **Pending Revenue**: Unsettled balances awaiting payment.
-- **Interactive Recharts Visualizations**:
-  - **Monthly Revenue Area Chart**: Smooth dual-tone area chart showing gross income trends over time.
-  - **Booking Status Donut Chart**: Proportional slice breakdown of reservation statuses.
-  - **Room Category Rates Bar Chart**: Inventory volume and average nightly rate comparison.
-- **Date-Range Filtering**: Switch analytics between `Today`, `Last 7 Days`, `Last 30 Days`, `This Month`, `Year to Date`, and `All Time`.
-- **Front-Desk Live Activity Audit Feed**: Real-time log tracking front-desk actions, key assignments, and staff operations.
+### How to Deploy on Vercel:
+1. In your **Vercel Dashboard**, click **"Add New Project"** &rarr; **"Import Git Repository"**.
+2. Select `ziuskumar/Luxe-Haven-Cloud-Based-Hotel-Property-Management-System`.
+3. In **Environment Variables**, configure:
+   - `MONGO_URL` / `ATLAS_URI`: `mongodb+srv://...`
+   - `SECRET`: `LuxeHavenSecretKey2026`
+   - `JWT_SECRET`: `LuxeHavenSecretKey2026`
+4. Click **Deploy**. Vercel will automatically compile the React frontend and deploy the Express API as a serverless microservice. Every future push to `main` auto-deploys in seconds.
 
 ---
 
 ## 🔑 Role-Based Access Control (RBAC) & Demo Accounts
 
-All demo accounts are pre-seeded in the database and accessible via the **1-Click Demo Switcher** in the top navigation bar:
+Luxe Haven features a **1-Click Demo Switcher** bar at the top of the interface. Recruiters and evaluators can switch roles instantly without re-typing passwords:
 
-| Role | Username | Demo Email | Password | Assigned Dashboard |
-|:---|:---|:---|:---|:---|
-| **Admin** | `admin` | `admin@luxehaven.com` | `Password@123` | Executive Analytics & User Management |
-| **Hotel Manager** | `manager` | `manager@luxehaven.com` | `Password@123` | Dynamic Pricing & Yield Operations |
-| **Receptionist** | `reception` | `reception@luxehaven.com` | `Password@123` | Front Desk Rack & Key Cards |
-| **Customer** | `guest` | `guest@luxehaven.com` | `Password@123` | Guest Portal & Invoices |
+| Role | Demo Email | Password | Assigned Dashboard & Capabilities |
+|:---|:---|:---|:---|
+| **Admin** | `admin@luxehaven.com` | `Password@123` | **Executive Analytics**: Gross Rev, RevPAR, Occupancy, Recharts trends, user & staff role administration. |
+| **Hotel Manager** | `manager@luxehaven.com` | `Password@123` | **Yield Operations**: Room inventory control, dynamic pricing adjustments, weekend surcharges, occupancy oversight. |
+| **Receptionist** | `reception@luxehaven.com` | `Password@123` | **Front Desk Rack**: Interactive calendar, key card issuance (`KEY-201-A`), 1-click check-in/out, housekeeping status. |
+| **Customer** | `guest@luxehaven.com` | `Password@123` | **Guest Portal**: Public hero landing page, date-range availability search, active key viewer, downloadable PDF invoices. |
 
 ---
 
-## ⚡ Quick Start & Setup
+## 🌟 Core PMS Engineering Modules
 
-### Prerequisites
-- [Node.js](https://nodejs.org/) (v20+ or v22+ recommended)
-- [Git](https://git-scm.com/)
-- [npm](https://www.npmjs.com/) (v10+)
-- [Docker](https://www.docker.com/) (optional, for containerized run)
+### 01 · Smart Room & Reservation Management Engine
+- **Concurrency-Safe Double-Booking Prevention**: Date-overlap algorithm (`checkInDate < reqCheckOutDate && checkOutDate > reqCheckInDate`) ensures 0 double-bookings across confirmed, checked-in, and pending states.
+- **Dynamic Pricing Engine**: Automated rate adjustments with weekend multipliers (+15%), seasonal demand factors, and occupancy surge triggers (+20% when occupancy &ge; 80%).
+- **Digital Key & Check-In**: Key cards issued at check-in with automatic room state transition:
+  $$\text{Clean} \xrightarrow{\text{Check-In}} \text{Occupied} \xrightarrow{\text{Check-Out}} \text{Dirty} \xrightarrow{\text{Housekeeping}} \text{Inspected} \rightarrow \text{Clean}$$
 
-### 1. Clone the Repository
+### 02 · Automated Billing & Sequential GST Invoices (PDFKit)
+- **Sequential Invoicing**: Compliant consecutive numbering (`INV-2026-0001`, `INV-2026-0002`).
+- **18% GST Breakdown**: Automated tax calculation split into **9% CGST** and **9% SGST**.
+- **Vector PDF Streaming**: Real-time generation of printable, downloadable PDF receipts with official resort branding, itemized room nights, luxury add-ons, and payment status stamps.
+
+### 03 · Interactive FullCalendar & Socket.IO Alerts
+- **Interactive FullCalendar v6**: Color-coded reservation tracking across Month, Week, and Day views.
+- **WebSocket Broadcasts**: Socket.IO triggers real-time toast alerts for bookings, check-ins, and payments across all connected staff terminals.
+
+### 04 · Visual Design System (Design Tokens)
+- Built on high-contrast luxury architectural aesthetics: **Voltage Lime** (`#d2e823`), **Midnight Ink** (`#1e2330`), **Plaster White** (`#ffffff`), and **Bone Canvas** (`#f3f3f1`).
+- Custom 32×32 branded architectural LH monogram favicon across PNG, ICO, and SVG formats.
+
+---
+
+## ⚡ Quick Start & Local Setup
+
 ```bash
+# 1. Clone the repository
 git clone https://github.com/ziuskumar/Luxe-Haven-Cloud-Based-Hotel-Property-Management-System.git
 cd Luxe-Haven-Cloud-Based-Hotel-Property-Management-System
-```
 
-### 2. Install Dependencies
-```bash
-# Install backend dependencies
+# 2. Install dependencies
 cd backend && npm install
+cd ../frontend && npm install
 cd ..
 
-# Install frontend dependencies
-cd frontend && npm install
-cd ..
-```
-
-### 3. Seed Database
-Populate MongoDB Atlas with default luxury rooms, staff roles, and initial reservations:
-```bash
+# 3. Seed initial database (7 luxury rooms, staff roles, bookings)
 npm run seed
-```
 
-### 4. Build & Launch Unified Application
-```bash
-# Build the React + Tailwind production bundle
+# 4. Build frontend & start server
 npm run build
-
-# Start the unified server (Express + React + Socket.IO)
 npm start
 ```
-The PMS application is now live at: **[http://localhost:5000](http://localhost:5000)**
+The application is live at: **[http://localhost:5000](http://localhost:5000)**
 
 ---
 
-## 🧪 Testing Suite
+## 🧪 Automated Testing Suite
 
-### Unit & Engine Tests (Jest + Supertest)
-Runs automated tests verifying dynamic pricing, weekend surcharges, double-booking prevention, JWT signing/verification, and sequential invoice generation:
+Verify dynamic pricing, double-booking prevention, JWT auth, and PDF invoice generation:
 ```bash
 npm test
 ```
 
-### End-to-End Tests (Playwright)
-```bash
-npx playwright test
-```
-
 ---
 
-## 🐳 Docker & Local Container Deployment
-
-The application includes a multi-stage Docker build that compiles the React frontend and runs the Node.js Express server in a single production-optimized container.
+## 🐳 Docker Deployment
 
 ```bash
-# Build and run with Docker Compose
+# Build and run multi-stage Docker container
 docker-compose up --build -d
 
-# View container logs
+# View real-time container logs
 docker-compose logs -f
 ```
-Access the containerized PMS at **http://localhost:5000**.
+Live at **http://localhost:5000**.
 
 ---
 
-## 📡 API Endpoints Summary
+## 📡 Key REST API Endpoints
 
-### Authentication & Users
-- `POST /api/auth/register` - Register customer account
-- `POST /api/auth/login` - Authenticate and return JWT token
-- `GET /api/auth/me` - Get profile of authenticated user
-- `GET /api/auth/users` - List all staff & users *(Admin only)*
-- `PUT /api/auth/users/:id` - Update user role / status *(Admin only)*
-
-### Rooms & Availability
-- `GET /api/rooms` - Query rooms with date-availability & category filters
-- `GET /api/rooms/:id` - Get room details
-- `POST /api/rooms` - Create new room *(Admin / Manager)*
-- `PUT /api/rooms/:id` - Update room details & dynamic pricing *(Admin / Manager)*
-- `PATCH /api/rooms/:id/housekeeping` - Update housekeeping status *(Staff only)*
-
-### Bookings & Reservation Engine
-- `GET /api/bookings/check-availability` - Real-time availability check
-- `POST /api/bookings/calculate-price` - Dynamic price preview calculation
-- `POST /api/bookings` - Create booking with double-booking prevention
-- `GET /api/bookings` - List bookings (filtered by role)
-- `POST /api/bookings/:id/check-in` - Check in guest & assign room key *(Staff only)*
-- `POST /api/bookings/:id/check-out` - Check out guest & flag room dirty *(Staff only)*
-- `POST /api/bookings/:id/cancel` - Cancel reservation
-
-### Billing & Invoices
-- `GET /api/invoices` - List sequential invoices
-- `GET /api/invoices/:id` - Get single invoice details
-- `GET /api/invoices/:id/download` - Stream PDFKit generated vector invoice PDF
-- `POST /api/invoices/:id/payment` - Settle payment balance
-
-### Calendar & Analytics
-- `GET /api/calendar/events` - FullCalendar formatted events feed
-- `GET /api/calendar/daily` - Today's arrivals, departures, and in-house schedule
-- `GET /api/analytics` - Executive analytics, Recharts datasets, and KPIs *(Admin / Manager)*
-- `GET /api/notifications` - Real-time in-app notification center
-
----
-
-## 📁 Project Directory Structure
-
-```
-├── backend/
-│   ├── controllers/         # REST API Controllers (Auth, Rooms, Bookings, Invoices, Calendar, Analytics)
-│   ├── middleware/          # Auth & RBAC Middleware (protect, restrictTo)
-│   ├── Models/              # Mongoose Schemas (User, Room, Booking, Invoice, Notification, AuditLog)
-│   ├── Route/               # Express API Router (/api/...)
-│   ├── services/            # Core PMS Engines (Pricing, Reservation, Invoice PDFKit, Socket.IO Notifications)
-│   ├── tests/               # Jest test suites
-│   ├── init/                # Database seeders (seedPMS.js)
-│   └── app.js               # Express + Socket.IO entry point
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/      # React components
-│   │   │   ├── Dashboards/  # Role-specific dashboards (Admin, Manager, Receptionist, Customer)
-│   │   │   ├── Rooms/       # Real-time room availability & Booking modal with pricing preview
-│   │   │   ├── Calendar/    # FullCalendar scheduling view with modal details
-│   │   │   ├── Invoices/    # Sequential billing table with PDFKit download buttons
-│   │   │   └── Users/       # Admin RBAC management
-│   │   ├── context/         # AuthContext (JWT & demo switcher) & SocketContext (live alerts)
-│   │   ├── App.jsx          # Root component
-│   │   └── main.jsx         # React DOM entry
-│   └── dist/                # Production React bundle
-│
-├── Dockerfile               # Multi-stage production container build
-├── docker-compose.yml       # Production container orchestration
-├── package.json             # Root monorepo scripts
-└── README.md                # System documentation
-```
+- `POST /api/auth/login` - JWT authentication with demo credentials
+- `GET /api/rooms` - Query rooms with live date availability & category filters
+- `POST /api/bookings` - Create booking with concurrency-safe double-booking prevention
+- `POST /api/bookings/:id/check-in` - Front-desk guest check-in & digital key card issuance
+- `POST /api/bookings/:id/check-out` - Front-desk check-out & housekeeping dirty status flag
+- `GET /api/invoices/:id/download` - Stream PDFKit vector tax invoice PDF
+- `GET /api/calendar/events` - FullCalendar formatted reservation feed
+- `GET /api/analytics` - Executive KPI metrics and Recharts yield datasets
 
 ---
 
 ## 📜 License & Author
 
-Distributed under the MIT License. Developed with ❤️ for **Luxe Haven Cloud PMS** by [ziuskumar](https://github.com/ziuskumar).
+Distributed under the MIT License. Developed with ❤️ for **Luxe Haven Cloud Hotel PMS** by [ziuskumar](https://github.com/ziuskumar).
