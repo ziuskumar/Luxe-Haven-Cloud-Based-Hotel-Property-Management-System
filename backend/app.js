@@ -55,9 +55,7 @@ app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../frontend/views"));
 app.engine("ejs", ejsMate);
-app.use(express.static(path.join(__dirname, "../frontend/Public")));
-
-// Serve compiled React build if present
+// Serve compiled React build and brand assets first
 const localScratchDist = "C:\\Users\\ASUS\\.gemini\\antigravity\\brain\\97b019a5-1c80-41e1-9771-8c5a5a58411a\\scratch\\dist";
 const reactDistPath = fs.existsSync(localScratchDist)
   ? localScratchDist
@@ -65,6 +63,7 @@ const reactDistPath = fs.existsSync(localScratchDist)
 if (fs.existsSync(reactDistPath)) {
   app.use(express.static(reactDistPath));
 }
+app.use(express.static(path.join(__dirname, "../frontend/Public")));
 
 // Session store
 const store = MongoStore.create({

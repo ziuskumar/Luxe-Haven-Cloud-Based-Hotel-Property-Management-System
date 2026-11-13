@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="lh-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e2330"/>
+      <stop offset="100%" stop-color="#121620"/>
+    </linearGradient>
+    <linearGradient id="lh-lime" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dff53b"/>
+      <stop offset="100%" stop-color="#d2e823"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Rounded Square Container -->
+  <rect x="1" y="1" width="30" height="30" rx="5.5" ry="5.5" fill="url(#lh-bg)" stroke="#323a4c" stroke-width="1"/>
+  
+  <!-- Hotel Roofline Pediment & Star -->
+  <path d="M16 4.5 L17 6.8 L19.4 6.8 L17.5 8.2 L18.2 10.5 L16 9 L13.8 10.5 L14.5 8.2 L12.6 6.8 L15 6.8 Z" fill="url(#lh-lime)"/>
+  <path d="M6.5 11.2 L16 7.8 L25.5 11.2" stroke="url(#lh-lime)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Interlocking LH Monogram -->
+  <!-- L in Voltage Lime -->
+  <path d="M8.8 13 H11.8 V21.2 H16 V23.8 H8.8 Z" fill="url(#lh-lime)"/>
+
+  <!-- H in Plaster White -->
+  <path d="M17 13 H19.8 V17 H22.2 V13 H25 V23.8 H22.2 V19.2 H19.8 V23.8 H17 Z" fill="#ffffff"/>
+  
+  <!-- Foundation Line -->
+  <line x1="6.5" y1="26" x2="25.5" y2="26" stroke="url(#lh-lime)" stroke-width="0.9" stroke-linecap="round" opacity="0.85"/>
+</svg>
